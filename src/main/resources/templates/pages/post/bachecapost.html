@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+<head>
+  <script src="../js/removePost.js"></script>
+  <script src="../js/reportPost.js"></script>
+  <link rel="stylesheet" href="../css/post.css"> 
+  <title>TraWell</title>
+</head>
+<body>
+  <section layout:fragment="content">
+    <div th:include="fragments/post/post"> content here </div>
+  </section>
+</body>
+</html>

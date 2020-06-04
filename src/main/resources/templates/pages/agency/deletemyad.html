@@ -1,0 +1,50 @@
+<!--- @author MarioPaone --->
+
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+<head>
+  <title>Trawell</title>
+  <script src="../js/removeMyAd.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+  <link rel="stylesheet" href="../css/carsharing&itinerary.css">
+</head>
+<body>
+  <section layout:fragment="content" style = "background-image: url('https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); background-repeat: no-repeat;background-size: cover;;">
+    <div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+			  <div class="col-6 align-self-center">
+				  <div class = "card card-block personal-card">  
+				  	<div class = "container">
+              <p class="center" style="font-weight: bold;">Cancellare inserzioni</p>
+              <div class = "row">
+                <div class="col-12">
+                  <table class="list table-bordered table-secondary" style="margin-left:auto;margin-right:auto;">
+                    <thead>
+                      <th scope="col col-10">Ban ID</th>
+                      <th scope="col col-10">Start Date</th>
+                      <th scope="col col-10">End Date</th>
+                      <th scope="col col-10">Delete</th>
+                    </thead>
+                    <tbody  =${listaAds}>
+                      <tr th:each="ad : ${listaAds}">
+                        <td th:text='${ad.id}'></td>
+                        <td th:text='${ad.adStartingDate}'></td>
+                        <td th:text='${ad.adDueDate}'></td>
+                        <td class="text-center"><button th:id="${ad.id}" class="btn btn-primary remove"><span class="fas fa-trash-alt"></span> </button> </td>
+                      </tr>
+                    </tbody>
+                    <tbody  ="not ${listaAds}">
+                      <td colspan="2">No Ads present</td>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

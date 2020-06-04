@@ -1,0 +1,7 @@
+{
+    "name": "FindMyFlock",
+    "description": "Piattaforma di monitoraggio animali",
+    "repository": "https://github.com/VincentMilione/ium-proj",
+    "logo": "https://repository-images.githubusercontent.com/225654534/d5b86d00-346b-11ea-9585-6be2749e99b6",
+    "keywords": ["java", "spring", "travell"]
+  }

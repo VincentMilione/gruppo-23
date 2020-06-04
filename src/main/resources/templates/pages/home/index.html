@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+<head>
+  <title>Trawell</title>
+  <script src = "../js/home_click.js"></script>
+  <link rel="stylesheet" href="../css/home.css">
+  <script data-ad-client="ca-pub-9298774212406998" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+</head>
+<body>
+  <section layout:fragment="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+            <div class = "card blocks scrollbar">
+              <h5>Carsharings Available</h5>
+              <div  ="${carsharingAds.size()==0}">
+                  <img src="../image/sad.png" class="image"><br>
+                  <p>Non ci sono annunci carsharing</p>
+              </div>
+              <div th:include="fragments/carsharing/carsharings" class="post-full-height"></div>      
+            </div><!--fine card carsharing-->
+        </div><!--prima colonna-->
+        <div class="col-md-3">
+          <div class = "card blocks scrollbar"> 
+            <h5>Itineraries Available</h5>
+            <div  ="${itineraries.size()==0}">
+                <img src="../image/sad.png" class="image"><br>
+                <p>Non ci sono annunci itinerari</p>
+            </div>
+              <div th:include="fragments/itinerary/itineraries" class="post-full-height"> </div>  
+          </div><!--fine card itinerari-->        
+        </div><!--fine seconda colonna-->
+        <div class="col-md-5">  
+          <div class = "card blocks scrollbar">
+            <h5>Post Available</h5>
+            <div  ="${posts.size()==0}">
+              <img src="../image/sad.png" class="image"><br>
+              <p>Non ci sono posts</p>
+            </div>
+                <div th:include="fragments/post/posts" class="post-full-height"> </div>
+                <!--fine post-->
+            </div><!--fine card post-->
+        </div><!--fine terza colonna--> 
+        <div class="col-md-1">
+          <div class = "card blocks"  style="text-align: center;">
+            <h5>Ads Available</h5>
+              <img src="https://www.stickpng.com/assets/images/586efaf587dadaa6bf8d2a40.png" class="rotate">
+          </div><!--fine card annunci-->
+        </div><!--fine quarta colonna-->  
+    </div><!--fine row-->
+    </div><!--fine container-fluid-->
+  </section>
+</body>
+</html>
