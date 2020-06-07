@@ -52,6 +52,7 @@ class Register {
     //crea una lista con tutti i dati da caricare nel registro animali ({gps, name, type, batttiti})
     heartBeatLog(){
         var list = [];
+        
         this.list.forEach(e => {
             var btn = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="'+e.tracker+'">Dettagli</button>';
             var item = {gps: e.tracker, name: e.name, type: e.type, beat: e.hrtbt, details: btn};
