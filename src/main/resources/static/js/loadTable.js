@@ -17,8 +17,9 @@
                 tr.append('<td>'+el[attr]+'</td>')
             });
             
-            //inseriscila riga nella tabella
+            //inserisci la riga nella tabella
             $("#heart").find('tbody').append(tr);
+            $("#register").find('tbody').append(tr);
         });
 
         //pager

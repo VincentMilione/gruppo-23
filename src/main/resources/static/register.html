@@ -4,31 +4,114 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/stile.css" type = "text/css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  	<title>Registro dati</title>
+    <title>Registro dati</title>
 	<script>
 		$(function(){
 			$("#navbar").load("header.html");
 		});
-	</script>
+  </script>
 </head>
+<body>
+<div id= navbar></div>
+<div class="contorno" style="background-image: url('img/bg_1.jpg');">
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+        <h1 class="mb-0 bread">Registro dati</h1>
+      </div>
+    </div>
+  </div>
+</div>
 
- <body>
-   <div id=navbar></div><br>
+<hr>
 
-   <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
-    <i class="fas fa-search" aria-hidden="true"></i>
-    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
-    aria-label="Search">
+
+<div class="container">
+    <!-- Search form -->
+    <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
+        aria-label="Search">
+    </form><br>
+    
+    <table id="register" class="table table-striped">
+      <thead>
+        <tr>
+          <th name="gps">Codice Gps</th>
+          <th name="name">Nome</th>
+          <th name="type">Tipo</th>
+		  <th name="info">Info</th>
+		  <th name="modify">Modifica</th>
+          <th name="delete">Elimina</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <div class="container">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled"><a class="page-link" href="#">Pagina</a></li>
+      
+    </ul>
+  </div>
+
+<script src="js/animal.js"></script>
+<script src = "js/loadTable.js"></script>
+<script>
+$('document').ready(function() {
+  //getAnimal
+  var register = new Register();
+  loader("register",register.registerData());
+
+  $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var gps = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  var animal = register.getAnimal(gps)
+
+  var tr = $('<tr>')
+
+    tr.append('<td>'+animal.hrtbtH[0]+'</td>')
+        .append('<td>'+animal.hrtbtH[1]+'</td>')
+        .append('<td>'+animal.hrtbtH[2]+'</td>')
+        .append('<td>'+animal.hrtbtH[3]+'</td>')
+        .append('<td>'+animal.hrtbtH[4]+'</td>')
+        .append('<td>'+animal.hrtbtH[5]+'</td>')
+        .append('<td>'+animal.hrtbt+'</td>')
+
+  modal.find('.modal-title').text(animal.name)
+  modal.find('.modal-body #name').append(animal.name)
+  modal.find('.modal-body #gps').append(animal.tracker)
+  modal.find('.modal-body #type').append(animal.type)
+  modal.find('.modal-body #heartbeat').append(animal.hrtbt)
+  modal.find('.modal-body #history').find('tbody').append(tr)
+  modal.find('.modal-body #note').append(animal.note)
   
-  <span>
-  <button type="button" class="btn btn-outline-dark">Aggiungi un nuovo animale</button></span>
-</form>
-  
-	
+});
+
+//
+$('#exampleModal').on('hidden.bs.modal', function (event) {
+  var modal = $(this)
+
+  modal.find('.modal-title').text("")
+  modal.find('.modal-body #name').html("")
+  modal.find('.modal-body #gps').html("")
+  modal.find('.modal-body #type').html("")
+  modal.find('.modal-body #heartbeat').html("")
+  modal.find('.modal-body #history').find('tbody').html("")
+  modal.find('.modal-body #note').html("")
+});
+});
+</script>
 </body>
 </html>

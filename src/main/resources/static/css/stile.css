@@ -25,3 +25,9 @@
         font-size: 40px;
     }
   }
+
+.fa-times{
+    color: #ff0000;
+    align-items: center;
+    justify-content: center;
+}

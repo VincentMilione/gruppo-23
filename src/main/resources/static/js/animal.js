@@ -42,9 +42,14 @@ class Register {
     registerData(){
         var list = [];
         this.list.forEach(e => {
+
+            var infoIcon ='<i class="fas fa-search-plus"></i>';
+            var modifyIcon ='<i class="fas fa-pencil-alt"></i>';
+            var deleteIcon ='<i class="fas fa-times"></i>';
+  
             //il json deve contenere i dati che ti servono e ricorda che i th devono avere l'attributo name uguale al nome della prop
             //es. <th name= "type">Tipo</th> il json deve avere l'attr "type"
-            var item = {name: e.name, type:e.type};
+            var item = {gps: e.tracker, name: e.name, type:e.type, info: infoIcon, modify:modifyIcon, delete:deleteIcon };
             list.push(item);
         });
 
