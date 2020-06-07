@@ -1,2 +1,27 @@
-body {
+.contorno{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    padding-top: 8%;
+    padding-right: 10%;
+    padding-bottom: 8%;
+    padding-left: 10%;
 }
+.contorno{
+    width: 100%;
+    position: relative;
+}
+.contorno .slider-text .bread {
+    font-weight: 100;
+    color: #f8f9fa;
+    font-size: 60px;
+    font-family: "Lato", Arial, sans-serif;
+    letter-spacing: 3px;
+
+}
+@media screen and (max-width: 992px) {
+    .contorno .slider-text .bread {
+        font-size: 40px;
+    }
+  }
