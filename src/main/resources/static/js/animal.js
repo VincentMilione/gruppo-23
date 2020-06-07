@@ -42,7 +42,9 @@ class Register {
     registerData(){
         var list = [];
         this.list.forEach(e => {
-            var item = {name: e.name};
+            //il json deve contenere i dati che ti servono e ricorda che i th devono avere l'attributo name uguale al nome della prop
+            //es. <th name= "type">Tipo</th> il json deve avere l'attr "type"
+            var item = {name: e.name, type:e.type};
             list.push(item);
         });
 

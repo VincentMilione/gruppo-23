@@ -17,9 +17,6 @@
 			$("#navbar").load("header.html");
 		});
   </script>
-  
-  <script src="js/animal.js"></script>
-  <script src = "js/loadTable.js"></script>
 </head>
 <body>
 <div id= navbar></div>
@@ -47,12 +44,11 @@
     <table id="heart" class="table table-striped">
       <thead>
         <tr>
-          <th>Codice Gps</th>
-          <th>Nome</th>
-          <th>Tipo</th>
-          <th>Battiti</th>
-          <th>Storico</th>
-
+          <th name="gps">Codice Gps</th>
+          <th name="name">Nome</th>
+          <th name="type">Tipo</th>
+          <th name="beat">Battiti</th>
+          <th name="details">Storico</th>
         </tr>
       </thead>
       <tbody>
@@ -65,16 +61,18 @@
       
     </ul>
   </div>
-
+<!--Modal per le info-->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
+        <!--Header-->
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">New message</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <!--il corpo-->
         <div class="modal-body">
           <label>Codice GPS: </label>
           <label id = "gps"></label><br>
@@ -103,16 +101,20 @@
         <label id = "note"></label>
 
         </div>
+        <!--footer-->
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
         </div>
       </div>
     </div>
   </div>
+<script src="js/animal.js"></script>
+<script src = "js/loadTable.js"></script>
 <script>
 $('document').ready(function() {
   //getAnimal
   var register = new Register();
+  loader("heart",register.heartBeatLog());
 
   $('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
@@ -121,6 +123,7 @@ $('document').ready(function() {
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   var animal = register.getAnimal(gps)
+
   var tr = $('<tr>')
 
     tr.append('<td>'+animal.hrtbtH[0]+'</td>')
