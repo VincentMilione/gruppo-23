@@ -62,12 +62,98 @@
   <div class="container">
     <ul class="pagination justify-content-center">
       <li class="page-item disabled"><a class="page-link" href="#">Pagina</a></li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Successiva</a></li>
+      
     </ul>
   </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label>Codice GPS: </label>
+          <label id = "gps"></label><br>
+          <label>Tipo: </label>
+          <label id = "type"></label><br>
+          <label>Battiti: </label>
+          <label id = "heartbeat"></label><br>
+          <label>Storico: </label>
+          <table id = "history" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Lun</th>
+                <th>Mar</th>
+                <th>Mer</th>
+                <th>Gio</th>
+                <th>Ven</th>
+                <th>Sab</th>
+                <th>Dom</th>
+              </tr>
+            </thead>
+            <tbody>
+          
+            </tbody>
+          </table>
+         <label> Note: </label> 
+        <label id = "note"></label>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+$('document').ready(function() {
+  //getAnimal
+  var register = new Register();
+
+  $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var gps = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  var animal = register.getAnimal(gps)
+  var tr = $('<tr>')
+
+    tr.append('<td>'+animal.hrtbtH[0]+'</td>')
+        .append('<td>'+animal.hrtbtH[1]+'</td>')
+        .append('<td>'+animal.hrtbtH[2]+'</td>')
+        .append('<td>'+animal.hrtbtH[3]+'</td>')
+        .append('<td>'+animal.hrtbtH[4]+'</td>')
+        .append('<td>'+animal.hrtbtH[5]+'</td>')
+        .append('<td>'+animal.hrtbt+'</td>')
+
+  modal.find('.modal-title').text(animal.name)
+  modal.find('.modal-body #name').append(animal.name)
+  modal.find('.modal-body #gps').append(animal.tracker)
+  modal.find('.modal-body #type').append(animal.type)
+  modal.find('.modal-body #heartbeat').append(animal.hrtbt)
+  modal.find('.modal-body #history').find('tbody').append(tr)
+  modal.find('.modal-body #note').append(animal.note)
   
+});
+
+//
+$('#exampleModal').on('hidden.bs.modal', function (event) {
+  var modal = $(this)
+
+  modal.find('.modal-title').text("")
+  modal.find('.modal-body #name').html("")
+  modal.find('.modal-body #gps').html("")
+  modal.find('.modal-body #type').html("")
+  modal.find('.modal-body #heartbeat').html("")
+  modal.find('.modal-body #history').find('tbody').html("")
+  modal.find('.modal-body #note').html("")
+});
+});
+</script>
 </body>
 </html>
