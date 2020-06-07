@@ -1,4 +1,6 @@
 //coordinates da aggiungere
+
+//classe animale contiene tutte le info (non c'è bisogno di getters and setters js è un po come python)
 class Animal {
     constructor(tracker, name, type, bday, sex, lmilk, children, hrtbt, hrtbtH) {
         this.type = type;
@@ -13,6 +15,7 @@ class Animal {
     }
 }
 
+//class register contiene 15 animali e alcuni metodi di supporto...
 class Register {
     constructor () {
         this.list =  [
@@ -34,16 +37,18 @@ class Register {
         ];   
     }
 
+    //crea una lista con tutti i dati da caricare nel registro animali ({gps, name, type})
     registerData(){
         var list = [];
         this.list.forEach(e => {
-            var item = {name: e.name, };
+            var item = {name: e.name};
             list.push(item);
         });
 
         return list;
     }
     
+    //crea una lista con tutti i dati da caricare nel registro animali ({gps, name, type, batttiti})
     heartBeatLog(){
         var list = [];
         this.list.forEach(e => {
@@ -55,6 +60,6 @@ class Register {
     }
 
     getAnimal(gps) {
-        return this.list.map();       
+        //return this.list.map();       
     }
 }
