@@ -1,21 +1,17 @@
 $( document ).ready(function() {
     let list = new Register().heartBeatLog();
     
-    list.forEach(el => {
+    list.forEach((el, index) => {
         let tr = $('<tr>');
         
-        tr.append('<td>'+el.gps+'</td>');
-        tr.append('<td>'+el.name+'</td>');
-        tr.append('<td>'+el.type+'</td>');
-        tr.append('<td>'+el.beat+' bps</td>');
-        tr.append('<td>blabla</td>');
-        tr.css("visibility", "hidden");
+        if (index >= 10) tr.css("display", "none");
 
+        tr.append('<td>'+el.gps+'</td>')
+        .append('<td>'+el.name+'</td>')
+        .append('<td>'+el.type+'</td>')
+        .append('<td>'+el.beat+' bps</td>')
+        .append('<td>blabla</td>');
+        
         $("#heart").find('tbody').append(tr);
     });
-
-    $('#heart tr').each(function(){
-        $(this).css("visibility", "visible");
-    });
-    
 });
