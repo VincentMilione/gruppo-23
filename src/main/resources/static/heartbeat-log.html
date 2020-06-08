@@ -35,11 +35,12 @@
 
 <div class="container">
     <!-- Search form -->
-    <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+    <div  class="form-inline d-flex justify-content-center md-form form-sm mt-0">
         <i class="fas fa-search" aria-hidden="true"></i>
         <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
-        aria-label="Search">
-    </form><br>
+        aria-label="Search" name="srch">
+        <button id="cerca" type="submit" class="form-control form-control-sm" > Cerca</button>
+    </div><br>
     <table id="heart" class="table table-striped">
       <thead>
         <tr>
@@ -109,11 +110,13 @@
   </div>
 <script src="js/animal.js"></script>
 <script src = "js/loadTable.js"></script>
+<script src = "js/search.js"></script>
 <script>
 $('document').ready(function() {
   //getAnimal
   var register = new Register();
   loader("heart",register.heartBeatLog());
+  pager(register.heartBeatLog())
 
   $('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
@@ -155,6 +158,48 @@ $('#exampleModal').on('hidden.bs.modal', function (event) {
   modal.find('.modal-body #history').find('tbody').html("")
   modal.find('.modal-body #note').html("")
 });
+
+//paginare la lista e creare le sezioni delle pagine(di conseguenza attaccare anche dei listener dei bottoni)
+function pager (list) {
+  //resettare il coso della paginazione
+  $('.page-item').not('.disabled').remove()
+
+  let nPg = (list.length/10)
+  for (var i = 0; i < nPg; i++)  {
+    var btn = i==0 ? '<li class="page-item active"><a class="page-link" href="#">'+(i+1)+'</a></li>' : '<li class="page-item"><a class="page-link" href="#">'+(i+1)+'</a></li>'
+    $('.pagination').append(btn)
+    
+  }
+
+  $('.page-item').click(function(){
+      let num = parseInt($(this).find("a").html())
+  
+      $('.page-item').removeClass('active')
+      $(this).addClass('active')
+      $('#heart tbody tr:visible').hide()
+      $('#heart tbody tr').slice((num-1)*10,(num*10)-1).show()
+    })
+}
+
+$('#cerca').click(function(){
+        //fare un filter su elementi che possiedono nell'html una substring del nome dell'animale
+        let list = register.heartBeatLog()
+        let page = []
+        $('#heart tbody tr').remove()
+      
+        list.forEach(e =>{
+            let str = e.name
+            let srch = $('input[name = "srch"]').val()
+           
+            if(str.indexOf(srch)>=0){
+                page.push(e)
+            }
+        });
+
+        pager(page)
+        loader("heart", page)
+        //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin
+    })
 });
 </script>
 </body>
