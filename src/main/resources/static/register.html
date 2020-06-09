@@ -82,8 +82,8 @@
       <div class="modal-body">
         <label>Codice GPS: </label>
         <label id = "gps"></label><br>
-        <label>Eta': </label>
-        <label id="eta"></label><br>
+        <label>Nascita: </label>
+        <label id="bday"></label><br>
         <label>Tipo: </label>
         <label id = "type"></label><br>
         <label>Sesso: </label>
@@ -118,7 +118,7 @@ $('document').ready(function() {
   modal.find('.modal-title').text(animal.name)
   modal.find('.modal-body #name').append(animal.name)
   modal.find('.modal-body #gps').append(animal.tracker)
-  modal.find('.modal-body #eta').append(animal.bday)
+  modal.find('.modal-body #bday').append(animal.bday)
   modal.find('.modal-body #type').append(animal.type)
   modal.find('.modal-body #sex').append(animal.sex)
   modal.find('.modal-body #milk').append(animal.lmilk)
@@ -132,7 +132,7 @@ $('#exampleModal').on('hidden.bs.modal', function (event) {
   modal.find('.modal-title').text("")
   modal.find('.modal-body #name').html("")
   modal.find('.modal-body #gps').html("")
-  modal.find('.modal-body #eta').html("")
+  modal.find('.modal-body #bday').html("")
   modal.find('.modal-body #type').html("")
   modal.find('.modal-body #sex').html("")
   modal.find('.modal-body #milk').html("")
