@@ -10,6 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="js/animal.js"></script>
+    <script src = "js/loadTable.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <title>Registro dati</title>
 	<script>
@@ -40,6 +42,7 @@
         <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
         aria-label="Search">
         <button id="cerca" type="submit" class="form-control form-control" > Cerca</button>
+        <button id="cerca" type="submit" class="form-control form-control" > Aggiungi Nuovo Animale</button>
     </form><br>
     
     <table id="register" class="table table-striped">
@@ -64,8 +67,7 @@
     </ul>
   </div>
 
-<script src="js/animal.js"></script>
-<script src = "js/loadTable.js"></script>
+
 <script>
 $('document').ready(function() {
   //getAnimal
