@@ -1,9 +1,30 @@
 
     //prendo dal registro le info da inserire nella tabella
+    function pager (list) {
+        //resettare il coso della paginazione
+        $('.page-item').not('.disabled').remove()
+      
+        let nPg = (list.length/10)
+        for (var i = 0; i < nPg; i++)  {
+          var btn = i==0 ? '<li class="page-item active"><a class="page-link" href="#">'+(i+1)+'</a></li>' : '<li class="page-item"><a class="page-link" href="#">'+(i+1)+'</a></li>'
+          $('.pagination').append(btn)
+          
+        }
+      
+        $('.page-item').click(function(){
+            let num = parseInt($(this).find("a").html())
+        
+            $('.page-item').removeClass('active')
+            $(this).addClass('active')
+            $('#heart tbody tr:visible').hide()
+            $('#heart tbody tr').slice((num-1)*10,(num*10)-1).show()
+          })
+      }
     
     function loader(tbId, list) {
         //per ogni elemento
         let cols = $('#'+tbId +' thead th')
+        pager(list)
 
         list.forEach((el, index) => {
             //crea una nuova riga per la tabella

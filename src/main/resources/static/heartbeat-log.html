@@ -160,26 +160,7 @@ $('#exampleModal').on('hidden.bs.modal', function (event) {
 });
 
 //paginare la lista e creare le sezioni delle pagine(di conseguenza attaccare anche dei listener dei bottoni)
-function pager (list) {
-  //resettare il coso della paginazione
-  $('.page-item').not('.disabled').remove()
 
-  let nPg = (list.length/10)
-  for (var i = 0; i < nPg; i++)  {
-    var btn = i==0 ? '<li class="page-item active"><a class="page-link" href="#">'+(i+1)+'</a></li>' : '<li class="page-item"><a class="page-link" href="#">'+(i+1)+'</a></li>'
-    $('.pagination').append(btn)
-    
-  }
-
-  $('.page-item').click(function(){
-      let num = parseInt($(this).find("a").html())
-  
-      $('.page-item').removeClass('active')
-      $(this).addClass('active')
-      $('#heart tbody tr:visible').hide()
-      $('#heart tbody tr').slice((num-1)*10,(num*10)-1).show()
-    })
-}
 
 $('#cerca').click(function(){
         //fare un filter su elementi che possiedono nell'html una substring del nome dell'animale
@@ -196,7 +177,6 @@ $('#cerca').click(function(){
             }
         });
 
-        pager(page)
         loader("heart", page)
         //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin
     })
