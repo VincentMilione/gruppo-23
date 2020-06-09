@@ -43,7 +43,7 @@ class Register {
         var list = [];
         this.list.forEach(e => {
 
-            var infoIcon ='<i class="fas fa-search-plus"></i>';
+            var infoIcon ='<button class="btn"><i class="fas fa-search-plus" data-toggle="modal" data-target="#exampleModal" data-whatever"'+e.tracker+'" ></i></button>';
             var modifyIcon ='<i class="fas fa-pencil-alt"></i>';
             var deleteIcon ='<i class="fas fa-times"></i>';
   

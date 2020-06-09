@@ -40,7 +40,7 @@
     <form class="form-inline d-flex justify-content-left md-form form-sm mt-0">
         <i class="fas fa-search" aria-hidden="true"></i>
         <input class="form-control form-control-sm ml-3 " type="text" placeholder="Inserisci nome animale"
-        aria-label="Search" style="width: 70%;">
+        aria-label="Search" style="width: 70%; margin-right: 8px;">
         <button id="cerca" type="submit" class="form-control form-control" > Cerca</button>
         <span><button id="cerca" type="submit" class="form-control form-control" > Aggiungi Nuovo Animale</button></span>
     </form><br>
@@ -67,6 +67,39 @@
     </ul>
   </div>
 
+<!--Modal per icona info -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <label>Codice GPS: </label>
+        <label id = "gps"></label><br>
+        <label>Età: </label>
+        <label id="eta"></label><br>
+        <label>Tipo: </label>
+        <label id = "type"></label><br>
+        <label>Sesso: </label>
+        <label id = "sex"></label><br>
+        <label>Latte prodotto: </label>
+        <label id = "milk"></label><br>
+        <label>Numero Parti: </label>
+        <label id= "children"></label><br>
+      </div>
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script>
 $('document').ready(function() {
@@ -82,24 +115,14 @@ $('document').ready(function() {
   var modal = $(this)
   var animal = register.getAnimal(gps)
 
-  var tr = $('<tr>')
-
-    tr.append('<td>'+animal.hrtbtH[0]+'</td>')
-        .append('<td>'+animal.hrtbtH[1]+'</td>')
-        .append('<td>'+animal.hrtbtH[2]+'</td>')
-        .append('<td>'+animal.hrtbtH[3]+'</td>')
-        .append('<td>'+animal.hrtbtH[4]+'</td>')
-        .append('<td>'+animal.hrtbtH[5]+'</td>')
-        .append('<td>'+animal.hrtbt+'</td>')
-
   modal.find('.modal-title').text(animal.name)
   modal.find('.modal-body #name').append(animal.name)
   modal.find('.modal-body #gps').append(animal.tracker)
+  modal.find('.modal-body #eta').append(animal.bday)
   modal.find('.modal-body #type').append(animal.type)
-  modal.find('.modal-body #heartbeat').append(animal.hrtbt)
-  modal.find('.modal-body #history').find('tbody').append(tr)
-  modal.find('.modal-body #note').append(animal.note)
-  
+  modal.find('.modal-body #sex').append(animal.sex)
+  modal.find('.modal-body #milk').append(animal.lmilk)
+  modal.find('modal-body #children').append(animal.children)
 });
 
 //
@@ -109,10 +132,11 @@ $('#exampleModal').on('hidden.bs.modal', function (event) {
   modal.find('.modal-title').text("")
   modal.find('.modal-body #name').html("")
   modal.find('.modal-body #gps').html("")
+  modal.find('.modal-body #eta').html("")
   modal.find('.modal-body #type').html("")
-  modal.find('.modal-body #heartbeat').html("")
-  modal.find('.modal-body #history').find('tbody').html("")
-  modal.find('.modal-body #note').html("")
+  modal.find('.modal-body #sex').html("")
+  modal.find('.modal-body #milk').html("")
+  modal.find('.modal-body #children').html("")
 });
 });
 </script>
