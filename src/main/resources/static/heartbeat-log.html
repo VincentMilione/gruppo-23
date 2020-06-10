@@ -35,12 +35,12 @@
 
 <div class="container">
     <!-- Search form -->
-    <div  class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+    <form id = "ricerca" class="form-inline d-flex justify-content-center md-form form-sm mb-2">
         <i class="fas fa-search" aria-hidden="true"></i>
         <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
         aria-label="Search" name="srch" style="margin-right: 8px;">
         <button id="cerca" type="submit" class="form-control form-control" > Cerca</button>
-    </div><br>
+    </form>
     <table id="heart" class="table table-striped">
       <thead>
         <tr>
@@ -162,7 +162,7 @@ $('#exampleModal').on('hidden.bs.modal', function (event) {
 //paginare la lista e creare le sezioni delle pagine(di conseguenza attaccare anche dei listener dei bottoni)
 
 
-$('#cerca').click(function(){
+$('#ricerca').submit(function(e){
         //fare un filter su elementi che possiedono nell'html una substring del nome dell'animale
         let list = register.heartBeatLog()
         let page = []
@@ -178,6 +178,7 @@ $('#cerca').click(function(){
         });
 
         loader("heart", page)
+        return false;
         //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin
     })
 });
