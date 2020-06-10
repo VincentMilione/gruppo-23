@@ -11,7 +11,7 @@
           
         }
       
-        $('.page-item').click(function(){
+        $('.page-item').not('.disabled').click(function(){
             let num = parseInt($(this).find("a").html())
         
             $('.page-item').removeClass('active')
