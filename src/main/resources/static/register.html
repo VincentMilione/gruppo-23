@@ -37,10 +37,10 @@
 
 <div class="container">
     <!-- Search form -->
-    <form class="form-inline d-flex justify-content-left md-form form-sm mt-0">
+    <form class="form-inline d-flex justify-content-left md-form form-sm mt-0" id="ricerca">
         <i class="fas fa-search" aria-hidden="true"></i>
         <input class="form-control form-control-sm ml-3 " type="text" placeholder="Inserisci nome animale"
-        aria-label="Search" style="width: 70%; margin-right: 8px;">
+        aria-label="Search" name="srch" style="width: 70%; margin-right: 8px;">
         <button id="cerca" type="submit" class="form-control form-control" > Cerca</button>
         <span><button id="cerca" type="submit" class="form-control form-control" > Aggiungi Nuovo Animale</button></span>
     </form><br>
@@ -141,7 +141,7 @@ $('#exampleModal').on('hidden.bs.modal', function (event) {
 });
 
 
-$('#cerca').click(function(){
+$('#ricerca').submit(function(e){
         //fare un filter su elementi che possiedono nell'html una substring del nome dell'animale
         let list = register.registerData()
         let page = []
@@ -157,6 +157,7 @@ $('#cerca').click(function(){
         });
 
         loader("register", page)
+        return false
         //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin
     });
  });
