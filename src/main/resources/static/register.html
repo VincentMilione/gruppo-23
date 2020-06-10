@@ -106,6 +106,7 @@ $('document').ready(function() {
   //getAnimal
   var register = new Register();
   loader("register",register.registerData());
+  registerPager(register.registerData())
 
   $('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
@@ -138,7 +139,27 @@ $('#exampleModal').on('hidden.bs.modal', function (event) {
   modal.find('.modal-body #milk').html("")
   modal.find('.modal-body #children').html("")
 });
-});
+
+
+$('#cerca').click(function(){
+        //fare un filter su elementi che possiedono nell'html una substring del nome dell'animale
+        let list = register.registerData()
+        let page = []
+        $('#register tbody tr').remove()
+      
+        list.forEach(e =>{
+            let str = e.name
+            let srch = $('input[name = "srch"]').val()
+           
+            if(str.indexOf(srch)>=0){
+                page.push(e)
+            }
+        });
+
+        loader("register", page)
+        //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin
+    });
+ });
 </script>
 </body>
 </html>
