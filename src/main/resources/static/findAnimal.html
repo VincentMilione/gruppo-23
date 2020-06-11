@@ -33,48 +33,68 @@
 	  
 	  <hr>
 	  <section>
-		<div  class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+		<form class="form-inline d-flex justify-content-center md-form form-sm mb-2">
 			<!-- Search form -->
 			<i class="fas fa-search" aria-hidden="true"></i>
 			<input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
 			aria-label="Search" name="srch">
 			<button id="cerca" type="submit" class="form-control form-control-sm" > Cerca</button>
-		</div>
+		</form>
 	  </section>
 	  <section class="container clearfix">
 		  <!--table-->
 		  <div>
+			<label>Fuori dal raggio:</label>
 		  <ul class="list-group list-group-flush float-left">
-			<li class="list-group-item">Cras justo odio</li>
-			<li class="list-group-item">Dapibus ac facilisis in</li>
-			<li class="list-group-item">Morbi leo risus</li>
-			<li class="list-group-item">Porta ac consectetur ac</li>
-			<li class="list-group-item">Vestibulum at eros</li>
+			<li class="list-group-item"></li>
+		  </ul>
+		    <label>Dentro il raggio:</label>
+		  <ul class="list-group list-group-flush float-left">
+			<li class="list-group-item"></li>
 		  </ul>
 		</div>
 		  <div class="float-right" id='googleMap'style="width:75%;height:400px;"></div>
 	    </section>
 
 	<script src="js/animal.js"></script>
-	<script src = "js/loadTable.js"></script>
-	<script src = "js/search.js"></script>
 	<script>
-		function myMap() {
-			var myLatLng = {lat: -25.363, lng: 131.044};
+	function myMap() {
+    
+    var myLatLng = {lat: 40.6978202, lng: 14.7390583};
 
-			var map = new google.maps.Map(document.getElementById('googleMap'), {
-			zoom: 4,
-			center: myLatLng
-			});
+    var map = new google.maps.Map(document.getElementById('googleMap'), {
+    zoom: 13,
+	center: myLatLng
+    });
 
-			var marker = new google.maps.Marker({
-			position: myLatLng,
-			map: map,
-			title: 'Hello World!'
-			});
-		}
-		</script>
-		
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe3x7g-RyX5hV6QHf8yLh-SxeHMQW7Qd4&callback=myMap"></script>
+    var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map
+   	});
+	
+	var myCity = new google.maps.Circle({
+	center:myLatLng,
+	radius:2000,
+	strokeColor:"#0000FF",
+	strokeOpacity:0.8,
+	strokeWeight:2,
+	fillColor:"#0000FF",
+	fillOpacity:0.4,
+	map: map
+	});
+
+	var infowindow = new google.maps.InfoWindow({
+	content:"Nuvola",
+	map: map
+	});
+
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.open(map,marker);
+
+	});
+}
+	</script>
+	
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe3x7g-RyX5hV6QHf8yLh-SxeHMQW7Qd4&callback=myMap"></script>
 </body>
 </html>
