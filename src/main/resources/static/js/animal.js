@@ -44,8 +44,8 @@ class Register {
         var list = [];
         this.list.forEach(e => {
 
-            var infoIcon ='<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-whatever="'+e.tracker+'"><i class="fas fa-search-plus"  ></i></button>';
-            var modifyIcon ='<i class="fas fa-pencil-alt"></i>';
+            var infoIcon ='<button type="button" class="btn" data-toggle="modal" data-target="#infoModal" data-whatever="'+e.tracker+'"><i class="fas fa-search-plus"  ></i></button>';
+            var modifyIcon ='<button type="button" class="btn" data-toggle="modal" data-target="#modificaModal" data-whatever="'+e.tracker+'"><i class="fas fa-pencil-alt"></i></button>';
             var deleteIcon ='<i class="fas fa-times"></i>';
   
             //il json deve contenere i dati che ti servono e ricorda che i th devono avere l'attributo name uguale al nome della prop
