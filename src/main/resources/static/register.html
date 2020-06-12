@@ -211,7 +211,7 @@ $('#ricerca').submit(function(e){
             let str = e.name
             let srch = $('input[name = "srch"]').val()
            
-            if(str.indexOf(srch)>=0){
+            if(str.match(srch) || str.toLowerCase().match(srch)){
                 page.push(e)
             }
         });
