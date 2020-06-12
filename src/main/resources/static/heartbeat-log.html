@@ -168,10 +168,10 @@ $('#ricerca').submit(function(e){
         $('#heart tbody tr').remove()
       
         list.forEach(e =>{
-            let str = toLowerCase(e.name)
-            let srch = toLowerCase($('input[name = "srch"]').val())
+            let str = (e.name)
+            let srch = ($('input[name = "srch"]').val())
            
-            if(str.indexOf(srch)>=0){
+            if(str.match(srch) || str.toLowerCase().match(srch)){
                 page.push(e)
             }
         });
