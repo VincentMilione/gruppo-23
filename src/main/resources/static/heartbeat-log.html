@@ -171,7 +171,7 @@ $('#ricerca').submit(function(e){
             let str = (e.name)
             let srch = ($('input[name = "srch"]').val())
            
-            if(str.match(srch) || str.toLowerCase().match(srch) || str.includes(srch.toLowerCase())){
+            if(str.match(srch) || str.toLowerCase().match(srch) || str.toLowerCase().includes(srch.toLowerCase())){
                 page.push(e)
             }
         });
