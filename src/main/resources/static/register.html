@@ -90,7 +90,7 @@
         <label id = "sex"></label><br>
         <label><strong>Litri di latte prodotto:</strong> </label>
         <label id = "milk"></label><br>
-        <label><strong>Numero Parti:</strong> </label>
+        <label><strong>Numero di parti:</strong> </label>
         <label id= "children"></label><br>
       </div>
         <!--footer-->
@@ -119,13 +119,41 @@
         <label><strong>Litri di latte prodotto:</strong> </label>
         <label id = "milk"></label>
         <span><input name="litres" type="number" id="milkLitres" value="-1" min="0" max="100" step="1"/></span><br>
-        <label><strong>Numero Parti:</strong> </label>
+        <label><strong>Numero di parti:</strong> </label>
         <label id= "children"></label>
         <span><input type="number" id="numberChildren" name="children" value="-1" min="0" max="100" step="1"/></span>
       </div>
         <!--footer-->
         <div class="modal-footer">
           <button type="button" id="modifyButton" class="btn btn-secondary" data-dismiss="modal">Salva</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal per icona elimina -->
+<div class="modal fade" id="eliminaModal" tabindex="-1" role="dialog" aria-labelledby="eliminaModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="eliminaModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <label hidden ><strong> GPS:</strong> </label>
+        <input hidden id="gpsToDelete" name="gpsToDelete"></label><br>
+        <label>Sei sicuro di voler eliminare</label>
+        <strong id="animalName"></strong>
+        <label>dal registro?</label>
+      </div>
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" id="eliminaButton" class="btn btn-primary" data-dismiss="modal">Si</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
         </div>
       </div>
     </div>
@@ -203,6 +231,51 @@ $('#modifyButton').click(function (event){
   var children = $('input[name = "children"]').val()
   
   register.update(gps, milkLitres,children)
+
+});
+
+$('#eliminaModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var gps = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  var animal = register.getAnimal(gps)
+
+  modal.find('.modal-title').text("Attenzione!");
+  modal.find('.modal-body #gpsToDelete').val(animal.tracker)
+  modal.find('.modal-body #animalName').text(animal.name);
+});
+
+$('#eliminaModal').on('hidden.bs.modal', function (event) {
+  var modal = $(this)
+
+  modal.find('.modal-title').html("")
+  modal.find('.modal-body #gpsToDelete').html("")
+  modal.find('.modal-body #animalName').html("")
+});
+
+$('#eliminaButton').click(function (event){
+  var modal = $(this)
+  var gps = $('input[name = "gpsToDelete"]').val()
+  console.log("Ciaoooo"+gps)
+
+  //register.deleteAnimal(gps)
+
+  //$(' .register').load(' .register');
+  //loader("register",register.registerData());
+  //$(".register").load(' .register');
+
+  register.deleteAnimal(gps);
+ // $(".register").load(' .register');
+  loader("register",register.registerData());
+
+
+        
+          
+  //loader("register",register.registerData());
+
+
 
 });
 

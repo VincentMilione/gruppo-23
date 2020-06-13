@@ -46,14 +46,18 @@ class Register {
 
             var infoIcon ='<button type="button" class="btn" data-toggle="modal" data-target="#infoModal" data-whatever="'+e.tracker+'"><i class="fas fa-search-plus"  ></i></button>';
             var modifyIcon ='<button type="button" class="btn" data-toggle="modal" data-target="#modificaModal" data-whatever="'+e.tracker+'"><i class="fas fa-pencil-alt"></i></button>';
-            var deleteIcon ='<i class="fas fa-times"></i>';
+            var deleteIcon ='<button type="button" class="btn" data-toggle="modal" data-target="#eliminaModal" data-whatever="'+e.tracker+'"><i class="fas fa-times"></i></button>';
   
             //il json deve contenere i dati che ti servono e ricorda che i th devono avere l'attributo name uguale al nome della prop
             //es. <th name= "type">Tipo</th> il json deve avere l'attr "type"
             if(e.sex =="Femmina")
+            {
             var item = {gps: e.tracker, name: e.name, type:e.type, info: infoIcon, modify:modifyIcon, delete:deleteIcon };
+            }
             else
+            {
             var item = {gps: e.tracker, name: e.name, type:e.type, info: infoIcon, modify:"", delete:deleteIcon };
+            }
             list.push(item);
         });
 
@@ -91,4 +95,18 @@ class Register {
             }
         }
     }
+
+    deleteAnimal(gps) {
+        console.log("Ciaoooo"+gps)
+
+        var animal = this.getAnimal(gps)
+        var index = this.list.indexOf(animal);
+        this.list.splice(index,1);
+
+        //loader("register",this.list)
+        return this.list;
+    }
+    
+
+    
 }
