@@ -42,7 +42,7 @@
         <input class="form-control form-control-sm ml-3 " type="text" placeholder="Inserisci nome animale"
         aria-label="Search" name="srch" style="width: 70%; margin-right: 8px;">
         <button id="cerca" type="submit" class="form-control form-control" > Cerca</button>
-        <span><button id="cerca" type="submit" class="form-control form-control" > Aggiungi Nuovo Animale</button></span>
+        <span><button id="aggiungi" type="submit" class="form-control form-control" > Aggiungi Nuovo Animale</button></span>
     </form><br>
     
     <table id="register" class="table table-striped">
@@ -114,12 +114,14 @@
       </div>
       <!--body-->
       <div class="modal-body">
+        <label hidden ><strong> GPS:</strong> </label>
+        <input hidden id="gps" name="gps"></label><br>
         <label><strong>Litri di latte prodotto:</strong> </label>
         <label id = "milk"></label>
-        <span><input type="number" id="milkLitres" value="-1" min="0" max="100" step="1"/></span><br>
+        <span><input name="litres" type="number" id="milkLitres" value="-1" min="0" max="100" step="1"/></span><br>
         <label><strong>Numero Parti:</strong> </label>
         <label id= "children"></label>
-        <span><input type="number" id="numberChildren" value="-1" min="0" max="100" step="1"/></span>
+        <span><input type="number" id="numberChildren" name="children" value="-1" min="0" max="100" step="1"/></span>
       </div>
         <!--footer-->
         <div class="modal-footer">
@@ -176,29 +178,33 @@ $('#modificaModal').on('show.bs.modal', function (event) {
   var modal = $(this)
   var animal = register.getAnimal(gps)
 
+  modal.find('.modal-body #gps').val(animal.tracker)
+  modal.find('.modal-title').text(animal.name)
   modal.find('.modal-body #milkLitres').val(animal.lmilk);
-  modal.find('.modal-body #children').val(animal.children)
+  modal.find('.modal-body #numberChildren').val(animal.children)
 });
 
 //
 $('#modificaModal').on('hidden.bs.modal', function (event) {
   var modal = $(this)
 
+  modal.find('.modal-title').html("")
+  modal.find('.modal-body #gps').html("")
   modal.find('.modal-body #milkLitres').html("")
   modal.find('.modal-body #children').html("")
 });
 
-/*$('#modifyButton').click(function (event){
+$('#modifyButton').click(function (event){
   var modal = $(this)
-  var gps = ??
+  var gps = $('input[name = "gps"]').val()
 
   var animal = register.getAnimal(gps) 
-  console.log(""+animal.lmilk);
-  var milkLitres = modal.find('.modal-body #milkLitres').val()
+  var milkLitres = $('input[name = "litres"]').val()
+  var children = $('input[name = "children"]').val()
   
-  animal.lmilk = milkLitres
+  register.update(gps, milkLitres,children)
 
-});*/
+});
 
 
 $('#ricerca').submit(function(e){

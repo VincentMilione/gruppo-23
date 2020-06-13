@@ -78,4 +78,14 @@ class Register {
         
         return undefined;
     }
+
+    update(gps, milkLitres, newChildren) {
+        for (var i = 0; i < this.list.length; i++) {
+            if(this.list[i].tracker == gps)
+            {
+                this.list[i].lmilk=milkLitres
+                this.list[i].children=newChildren;
+            }
+        }
+    }
 }
