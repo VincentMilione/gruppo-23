@@ -1,120 +1,148 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/stile.css" type = "text/css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  <title>Trova Animale</title>
-	<script>
-		$(function(){
-			$("#navbar").load("header.html");
-		});
-	</script>
-	<script src="js/animal.js"></script>
-</head>
 
- <body>
-     <div id="navbar"></div>
-	 <div class="contorno" style="background-image: url('img/bg_1.jpg');">
-		<div class="container">
-		  <div class="row no-gutters slider-text align-items-center justify-content-center">
-			<div class="col-md-9 ftco-animate text-center">
-			  <h1 class="mb-0 bread">Ritrova il tuo animale</h1>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	  
-	  <hr>
-	  <section>
-		<form class="form-inline d-flex justify-content-center md-form form-sm mb-2">
-			<!-- Search form -->
-			<i class="fas fa-search" aria-hidden="true"></i>
-			<input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
-			aria-label="Search" name="srch">
-			<button id="cerca" type="submit" class="form-control form-control-sm" > Cerca</button>
-		</form>
-	  </section>
-	  <section class="container clearfix">
-		  <!--table-->
-		  <div>
-			<label>Fuori dal raggio:</label>
-		  <ul class="list-group list-group-flush float-left">
-			<li class="list-group-item"></li>
-		  </ul>
-		    <label>Dentro il raggio:</label>
-		  <ul class="list-group list-group-flush float-left">
-			<li class="list-group-item"></li>
-		  </ul>
-		</div>
-		  <div class="float-right" id='googleMap'style="width:75%;height:400px;"></div>
-	    </section>
-
-	
-	<script>
-		//crea mappa
-		//crea raggio
-		//crea marcatori
-		//la lista: quando clicchiamo un elemento dobbiamo far riferimento al marker 
-	
-	function myMap() {
-		let list = new Register().list
-		var myLatLng = {lat: 40.6978202, lng: 14.7390583};
-
-		var map = new google.maps.Map(document.getElementById('googleMap'), {
-			zoom: 13,
-			center: myLatLng
-		});
-
-		let circle = new google.maps.Circle({
-			center:myLatLng,
-			radius:2000,
-			strokeColor:"#0000FF",
-			strokeOpacity:0.8,
-			strokeWeight:2,
-			fillColor:"#0000FF",
-			fillOpacity:0.4,
-			map: map
-		});
-
-		list.forEach(function(e) {
-			let cor = e.cordinate
-			let center = myLatLng
-			let marker = new google.maps.Marker({
-					position: cor,
-					map: map,
-					icon: {
-						url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-					}
-				});
-
-			let dis = google.maps.geometry.spherical.computeDistanceBetween(marker.getPosition(), circle.getCenter())
-			
-			if (dis > circle.getRadius()) {
-				marker.setIcon(null);
-			}
-
-			var infowindow = new google.maps.InfoWindow({
-				content:e.name,
-				map: map
-			});
-
-			google.maps.event.addListener(marker, 'click', function() {
-				infowindow.open(map,marker);
-			});
-		})	
-		
-		
-}
-	</script>
-	
-	<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyBe3x7g-RyX5hV6QHf8yLh-SxeHMQW7Qd4&callback=myMap"></script>
-</body>
-</html>
+		  
+		  <!DOCTYPE html>
+		  <html>
+		  <head>
+			  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+			  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+			  <meta charset="utf-8">
+			  <meta name="viewport" content="width=device-width, initial-scale=1">
+			  <link rel="stylesheet" href="css/stile.css" type = "text/css">
+			  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+			  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+			  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+			  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+			<title>Trova Animale</title>
+			  <script>
+				  $(function(){
+					  $("#navbar").load("header.html");
+				  });
+			  </script>
+			  <script src="js/animal.js"></script>
+		  </head>
+		  
+		   <body>
+			   <div id="navbar"></div>
+			   <div class="contorno" style="background-image: url('img/bg_1.jpg');">
+				  <div class="container">
+					<div class="row no-gutters slider-text align-items-center justify-content-center">
+					  <div class="col-md-9 ftco-animate text-center">
+						<h1 class="mb-0 bread">Ritrova il tuo animale</h1>
+					  </div>
+					</div>
+				  </div>
+				</div>
+				
+				<hr>
+				<section>
+				  <form class="form-inline d-flex justify-content-center md-form form-sm mb-2">
+					  <!-- Search form -->
+					  <i class="fas fa-search" aria-hidden="true"></i>
+					  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
+					  aria-label="Search" name="srch">
+					  <button id="cerca" type="submit" class="form-control form-control-sm" > Cerca</button>
+				  </form>
+				</section>
+				<section class="container clearfix">
+					<!--table-->
+				  <div class="float-left h-25 w-25">
+				  
+					<ul class="list-group list-group-flush">
+					  <li class="list-group-item"><label>Fuori dal raggio:</label></li>
+					</ul>
+					<ul id="out" class="list-group list-group-flush overflow-auto">
+					</ul>
+					<ul class="list-group list-group-flush">
+					  <li class="list-group-item"><label>Dentro il raggio:</label></li>
+					</ul>
+					<ul id="in" class="list-group list-group-flush overflow-auto">
+					</ul>
+				  </div>
+				  <div class="float-right" id='googleMap'style="width:75%;height:400px;"></div>
+				  </section>
+		  
+			  
+			  <script>
+				  //crea mappa
+				  //crea raggio
+				  //crea marcatori
+				  //la lista: quando clicchiamo un elemento dobbiamo far riferimento al marker 
+			  let register = new Register()
+			  let list = register.list
+			  let map
+			  
+			  function createList () {
+				  
+				  let in_ = $('#in')
+				  let out_ = $('#out')
+		  
+				  list.forEach(function(e){
+		  
+					  let str = $('<li id="'+e.tracker+'" class="list-group-item"><div>'+e.name+'<div></li>')
+		  
+					  if(e.marker.getIcon() == null){
+						  str.css("color", "red")
+						  out_.append(str)
+					  } else{
+						  str.css("color", "green")
+						  in_.append(str)
+					  }
+				  })
+			  }
+		  
+			  function myMap() {
+		  
+				  let myLatLng = {lat: 40.6978202, lng: 14.7390583}
+		  
+				  map = new google.maps.Map(document.getElementById('googleMap'), {
+					  zoom: 13,
+					  center: myLatLng
+				  });
+		  
+				  let circle = new google.maps.Circle({
+					  center:myLatLng,
+					  radius:2000,
+					  strokeColor:"#0000FF",
+					  strokeOpacity:0.8,
+					  strokeWeight:2,
+					  fillColor:"#0000FF",
+					  fillOpacity:0.4,
+					  map: map
+				  });
+		  
+				  list.forEach(function(e) {
+					  let cor = e.cordinate
+					  let center = myLatLng
+					  let marker = new google.maps.Marker({
+							  position: cor,
+							  map: map,
+							  icon: {
+								  url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+							  }
+						  });
+		  
+					  let dis = google.maps.geometry.spherical.computeDistanceBetween(marker.getPosition(), circle.getCenter())
+					  e.marker = marker
+		  
+					  if (dis > circle.getRadius()) {
+						  marker.setIcon(null);
+					  }
+		  
+					  var infowindow = new google.maps.InfoWindow({
+						  content:e.name,
+						  map: map
+					  });
+		  
+					  google.maps.event.addListener(marker, 'click', function() {
+						  infowindow.open(map,marker);
+					  });
+				  })	
+				  createList()
+		  }
+			  </script>
+			  
+			  <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyBe3x7g-RyX5hV6QHf8yLh-SxeHMQW7Qd4&callback=myMap"></script>
+		  </body>
+		  </html>
+		  

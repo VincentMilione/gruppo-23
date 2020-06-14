@@ -20,6 +20,13 @@
     letter-spacing: 3px;
 
 }
+
+.list-group{
+    max-height: 25em;
+    margin-bottom: 10%;
+    -webkit-overflow-scrolling: touch;
+}
+
 @media screen and (max-width: 992px) {
     .contorno .slider-text .bread {
         font-size: 40px;

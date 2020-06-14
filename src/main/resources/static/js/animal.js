@@ -14,6 +14,7 @@ class Animal {
         this.hrtbtH= hrtbtH;
         this.cordinate=cordinate;
         this.note= note;
+        this.marker = undefined;
     }
 }
 
