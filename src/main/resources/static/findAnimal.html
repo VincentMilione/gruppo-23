@@ -71,7 +71,29 @@
 			  let register = new Register()
 			  let list = register.list
 			  let map
-			  
+
+
+		function route(){
+			var directions = {start: {lat: 40.6978202, lng: 14.7390583}, end: {lat:40.690140, lng: 14.714848}};
+			var directionsDisplay = new google.maps.DirectionsRenderer();
+			var directionsService = new google.maps.DirectionsService();
+
+			directionsService.route({
+            origin:directions.start,
+            destination: directions.end,
+            travelMode: google.maps.TravelMode.DRIVING
+        },
+        function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(result);
+                directionsDisplay.setMap(map);
+
+            }
+            else {
+                alert("Directions Request failed:" +status);
+            }
+        });
+	}	  
 			  function createList () {
 				  
 				  let in_ = $('#in')
@@ -79,8 +101,15 @@
 		  
 				  list.forEach(function(e){
 		  
-					  let str = $('<li id="'+e.tracker+'" class="list-group-item"><div>'+e.name+'<div></li>')
-		  
+					  let str = $('<li class="list-group-item"></li>')
+					  let div = $('<div id="'+e.tracker+'">'+e.name+'<div>')
+					  
+					  div.click(function () {
+						  map.setCenter(register.getAnimal($(this).attr('id')).marker.getPosition())
+						  map.setZoom(20)
+					  })
+
+					  str.append(div)
 					  if(e.marker.getIcon() == null){
 						  str.css("color", "red")
 						  out_.append(str)
@@ -139,6 +168,7 @@
 					  });
 				  })	
 				  createList()
+				  route()
 		  }
 			  </script>
 			  
