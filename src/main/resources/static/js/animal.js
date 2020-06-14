@@ -78,6 +78,7 @@ class Register {
         return list;
     }
 
+    //ottieni l'animale, dato il gps, per outputtare i dati nei modal
     getAnimal(gps) {
         for (var i = 0; i < this.list.length; i++) {
             if(this.list[i].tracker == gps)
@@ -87,6 +88,7 @@ class Register {
         return undefined;
     }
 
+    //dato il gps, modifica i dati passati
     update(gps, milkLitres, newChildren) {
         for (var i = 0; i < this.list.length; i++) {
             if(this.list[i].tracker == gps)
@@ -98,13 +100,16 @@ class Register {
     }
 
     deleteAnimal(gps) {
+
         console.log("Ciaoooo"+gps)
 
         var animal = this.getAnimal(gps)
         var index = this.list.indexOf(animal);
-        this.list.splice(index,1);
+       // this.list.splice(index,1);
+    
+        document.getElementById("register").children[1].children[index].style.display="none"
+       
 
-        //loader("register",this.list)
         return this.list;
     }
     
