@@ -61,11 +61,11 @@
 				  </div>
 				  <label for="quantity">Raggio di azione:</label>
 				  <input type="number" id="raggio" name="quantity" min="1000" max="10000" placeholder="2000 m">
+				  <button id="updateR">Modifica Raggio</button>
 				  <span>
 					<label for="sel1">Indirizzo:</label>
-					<select id="sel1">
-					  <option>1</option>
-					</select> </span>
+					<input type="text" id="addresses" readonly>
+					 </span>
 				  <div class="float-right" id='googleMap'style="width:75%;height:400px;"></div>
 				  </section>
 		  
@@ -90,10 +90,12 @@
 		  
 					  let str = $('<li class="list-group-item"></li>')
 					  let div = $('<div id="'+e.tracker+'">'+e.name+'<div>')
-					  
 					  div.click(function () {
-						  map.setCenter(register.getAnimal($(this).attr('id')).marker.getPosition())
+						  let animal= register.getAnimal($(this).attr('id'))
+					 	  map.setCenter(animal.marker.getPosition())
 						  map.setZoom(20)
+						  $('#addresses').val(animal.address)
+						 
 					  })
 
 					  str.append(div)
@@ -124,6 +126,7 @@
 					  strokeWeight:2,
 					  fillColor:"#0000FF",
 					  fillOpacity:0.4,
+					  editable:true,
 					  map: map
 				  });
 		  
@@ -152,10 +155,12 @@
 		  
 					  google.maps.event.addListener(marker, 'click', function() {
 						  infowindow.open(map,marker);
+						  
 					  });
 				  })	
 				  createList()
 		  }
+
 			  </script>
 			  
 			  <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyBe3x7g-RyX5hV6QHf8yLh-SxeHMQW7Qd4&callback=myMap"></script>
