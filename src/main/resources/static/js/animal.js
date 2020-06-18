@@ -100,6 +100,7 @@ class Register {
         }
     }
 
+    //dato il gps, ricerca l'animale, risale all'indice e lo nasconde dal registro
     deleteAnimal(gps) {
 
         console.log("Ciaoooo"+gps)

@@ -258,27 +258,8 @@ $('#eliminaModal').on('hidden.bs.modal', function (event) {
 $('#eliminaButton').click(function (event){
   var modal = $(this)
   var gps = $('input[name = "gpsToDelete"]').val()
-  console.log("Ciaoooo"+gps)
-
-  //register.deleteAnimal(gps)
-
-  //$(' .register').load(' .register');
-  //loader("register",register.registerData());
-  //$(".register").load(' .register');
 
   register.deleteAnimal(gps);
-  
- // $(".register").load(' .register');
-  //dropTable("register", register.registerData());
- // loader("register",register.registerData());
-
-
-        
-          
-  //loader("register",register.registerData());
-
-
-
 });
 
 
