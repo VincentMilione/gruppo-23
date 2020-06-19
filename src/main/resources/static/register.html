@@ -183,7 +183,7 @@
     </div>
   </div>
 
-    <!--Modal per aggiunta animale -->
+<!--Modal per aggiunta animale -->
 <div class="modal fade" id="aggiungiAnimaleModal" tabindex="-1" role="dialog" aria-labelledby="aggiungiAnimaleModalLabel" aria-hidden="true" style="margin-top: 250px;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -196,12 +196,15 @@
       </div>
       <!--body-->
       <div class="modal-body">
+        <h6 id="firstForm">Dati iniziali</h6>
+        <i class="fas fa-chevron-right" id="breadcrumbs"></i>
+        <h6 id="secondForm" style="color:#C0C0C0">Dati avanzati</h6><br><br>
         <label><strong> Codice GPS:</strong> </label>
-        <input id="gpsToAdd" name="gpsToAdd" value="q016w" readonly><br>
+        <input id="gpsToAdd" name="gpsToAdd" value="q016w" readonly><br><br>
         <label><strong>Nome</strong></label>
-        <input id="nameToAdd" name="nameToAdd" placeholder="Fiocco"><br>
+        <input id="nameToAdd" name="nameToAdd" placeholder="Fiocco"><br><br>
         <label><strong>Data di nascita</strong></label>
-        <input id="bdayToAdd" type="date"><br>
+        <input id="bdayToAdd" type="date"><br><br>
         <label><strong>Tipo</strong></label>
         <select name="typeToAdd" id="typeToAdd">
           <option value="caprino">Caprino</option>
@@ -209,14 +212,59 @@
           <option value="ovino">Ovino</option>
         </select>
   </div>
-      </div>
+      
         <!--footer-->
         <div class="modal-footer">
+          <button type="button" id="goToSecondForm" class="btn btn-primary" data-dismiss="modal">Avanti</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 
+<!--2° Modal per aggiunta animale -->
+<div class="modal fade" id="aggiungiAnimale2Modal" tabindex="-1" role="dialog" aria-labelledby="aggiungiAnimale2ModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="aggiungiAnimale2ModalLabel">Aggiungi un nuovo animale</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <h6 id="firstForm" style="color:#C0C0C0">Dati iniziali</h6>
+        <i class="fas fa-chevron-right" id="breadcrumbs"></i>
+        <h6 id="secondForm">Dati avanzati</h6><br><br>
+        <label><strong> Sesso:</strong> </label>
+         <span>
+            <div class="col-5" id="sexForm">
+              <div class="form-check form-check-group">
+                <input name="gruppo4" type="radio" id="male" value="male" checked>
+                <label for="radio10">Maschio</label>
+              </div>
+              <div class="form-check form-check-group">
+                <input name="gruppo4" type="radio" id="female" value="female">
+                <label for="radio11">Femmina</label>
+              </div>
+            </div>
+         </span>
+        <label><strong>Litri di latte</strong></label>
+        <input type="number" id="milkLitresToAdd" name="milkLitresToAdd" disabled><br><br>
+        <label><strong>Numero di parti</strong></label>
+        <input type="number" id="childrenToAdd" name="childrenToAdd" disabled><br><br>
+      </div>
+      
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" id="goToSecondForm" class="btn btn-primary" data-dismiss="modal">Avanti</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 $('document').ready(function() {
@@ -337,6 +385,24 @@ $('#aggiungiAnimale').click(function(event) {
   $('#aggiungiAnimaleModal').modal('show')
 
 });
+
+$('#goToSecondForm').click(function(event) {
+  $('#aggiungiAnimale2Modal').modal('show')   
+
+});
+
+$('input[type=radio][name=gruppo4]').change(function() {
+    if (this.value == 'male') {
+      document.getElementById("childrenToAdd").setAttribute('disabled', 'disabled');
+      document.getElementById("milkLitresToAdd").setAttribute('disabled', 'disabled');
+    }
+    else if (this.value == 'female') {
+      document.getElementById("childrenToAdd").removeAttribute('disabled')
+      document.getElementById("milkLitresToAdd").removeAttribute('disabled')
+    }
+});
+
+
 
 
 

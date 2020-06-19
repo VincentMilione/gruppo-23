@@ -53,3 +53,7 @@
     width:20%;
    
 }
+
+#breadcrumbs, #firstForm, #secondForm{
+    display:inline-block;
+}
