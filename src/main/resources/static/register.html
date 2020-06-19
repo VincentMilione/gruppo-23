@@ -42,7 +42,7 @@
         <input class="form-control form-control-sm ml-3 " type="text" placeholder="Inserisci nome animale"
         aria-label="Search" name="srch" style="width: 70%; margin-right: 8px;">
         <button id="cerca" type="submit" class="form-control form-control" > Cerca</button>
-        <span><button id="aggiungi" type="submit" class="form-control form-control" > Aggiungi Nuovo Animale</button></span>
+        <span><button id="aggiungiAnimale" type="submit" class="form-control form-control" > Aggiungi Nuovo Animale</button></span>
     </form><br>
     
     <table id="register" class="table table-striped">
@@ -183,6 +183,40 @@
     </div>
   </div>
 
+    <!--Modal per aggiunta animale -->
+<div class="modal fade" id="aggiungiAnimaleModal" tabindex="-1" role="dialog" aria-labelledby="aggiungiAnimaleModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="aggiungiAnimaleModalLabel">Aggiungi un nuovo animale</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <label><strong> Codice GPS:</strong> </label>
+        <input id="gpsToAdd" name="gpsToAdd" value="q016w" readonly><br>
+        <label><strong>Nome</strong></label>
+        <input id="nameToAdd" name="nameToAdd" placeholder="Fiocco"><br>
+        <label><strong>Data di nascita</strong></label>
+        <input id="bdayToAdd" type="date"><br>
+        <label><strong>Tipo</strong></label>
+        <select name="typeToAdd" id="typeToAdd">
+          <option value="caprino">Caprino</option>
+          <option value="bovino">Bovino</option>
+          <option value="ovino">Ovino</option>
+        </select>
+  </div>
+      </div>
+        <!--footer-->
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <script>
 $('document').ready(function() {
@@ -298,6 +332,13 @@ $('#messaggioModal').on('show.bs.modal', function (event) {
 
   modal.find('.modal-body #animalName').text(animalName)
 });
+
+$('#aggiungiAnimale').click(function(event) {
+  $('#aggiungiAnimaleModal').modal('show')
+
+});
+
+
 
 
 
