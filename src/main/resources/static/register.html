@@ -173,7 +173,7 @@
       <!--body-->
       <div class="modal-body">
         <strong id="animalName"></strong>
-          <label>è stato eliminato correttamente dal registro!</label>
+          <label>e' stato eliminato correttamente dal registro!</label>
       </div>
         <!--footer-->
         <div class="modal-footer">
@@ -284,7 +284,8 @@ $('#eliminaButton').click(function (event){
   var gps = $('input[name = "gpsToDelete"]').val()
 
   register.deleteAnimal(gps);
-  $('#messaggioModal').modal('show.bs.modal').append(register.getAnimal(gps).name)
+  $('#eliminaButton').val(register.getAnimal(gps).name)
+  $('#messaggioModal').modal('show')
 });
 
 $('#messaggioModal').on('show.bs.modal', function (event) {
@@ -293,9 +294,9 @@ $('#messaggioModal').on('show.bs.modal', function (event) {
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  var animalName = $(this).data
+  var animalName = $('#eliminaButton').val()
 
-  modal.find('.modal-body #animalName').text(animal.name);
+  modal.find('.modal-body #animalName').text(animalName)
 });
 
 
