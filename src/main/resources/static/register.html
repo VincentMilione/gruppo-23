@@ -153,7 +153,31 @@
         <!--footer-->
         <div class="modal-footer">
           <button type="button" id="eliminaButton" class="btn btn-primary" data-dismiss="modal">Si</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal per messaggio di avvenuta eliminazione -->
+<div class="modal fade" id="messaggioModal" tabindex="-1" role="dialog" aria-labelledby="messaggioModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="messaggioModalLabel">Perfetto!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <strong id="animalName"></strong>
+          <label>è stato eliminato correttamente dal registro!</label>
+      </div>
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Okay</button>
         </div>
       </div>
     </div>
@@ -260,7 +284,21 @@ $('#eliminaButton').click(function (event){
   var gps = $('input[name = "gpsToDelete"]').val()
 
   register.deleteAnimal(gps);
+  $('#messaggioModal').modal('show.bs.modal').append(register.getAnimal(gps).name)
 });
+
+$('#messaggioModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var gps = $(this).val // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  var animalName = $(this).data
+
+  modal.find('.modal-body #animalName').text(animal.name);
+});
+
+
 
 
 $('#ricerca').submit(function(e){
