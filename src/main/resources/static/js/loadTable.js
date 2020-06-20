@@ -43,6 +43,35 @@
             $("#"+tbId).find('tbody').append(tr);
         });
 
+        
+
+       
+    }
+
+    function loadAnimal(animal, register) {
+        //per ogni elemento
+        pager("register", register)
+
+        //crea una nuova riga per la tabella
+        let tr = $('<tr>') 
+        tr.css("display", "none")
+        //appendi tutti i dati
+        tr.append('<td name ="gps">'+animal.tracker+'</td>')
+        tr.append('<td name ="name">'+animal.name+'</td>')
+        tr.append('<td name ="type">'+animal.type+'</td>')
+        tr.append('<td name ="info"><button type="button" class="btn" data-toggle="modal" data-target="#infoModal" data-whatever="'+animal.tracker+'"><i class="fas fa-search-plus"  ></i></button></td>')
+        if(animal.sex=="Femmina")
+        tr.append('<td name ="modify"><button type="button" class="btn" data-toggle="modal" data-target="#modificaModal" data-whatever="'+animal.tracker+'"><i class="fas fa-pencil-alt"></i></button></td>')
+        else
+        tr.append('<td name ="modify"></td>')
+        tr.append('<td name ="delete"><button type="button" class="btn" data-toggle="modal" data-target="#eliminaModal" data-whatever="'+animal.tracker+'"><i class="fas fa-times"></i></button></td>')
+    
+        //inserisci la riga nella tabella
+        $("#register").find('tbody').append(tr);
+        
+
+        
+
        
     }
 

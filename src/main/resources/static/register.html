@@ -207,9 +207,9 @@
         <input id="bdayToAdd" type="date"><br><br>
         <label><strong>Tipo</strong></label>
         <select name="typeToAdd" id="typeToAdd">
-          <option value="caprino">Caprino</option>
-          <option value="bovino">Bovino</option>
-          <option value="ovino">Ovino</option>
+          <option value="Caprino">Caprino</option>
+          <option value="Bovino">Bovino</option>
+          <option value="Ovino">Ovino</option>
         </select>
   </div>
       
@@ -240,12 +240,12 @@
         <h6 id="secondForm">Dati avanzati</h6><br><br>
         <label><strong> Sesso:</strong> </label>
          <span>
-            <div class="col-5" id="sexForm">
-              <div class="form-check form-check-group">
+            <div class="col-5" >
+              <div class="form-check form-check-group" id="sexForm">
                 <input name="gruppo4" type="radio" id="male" value="male" checked>
                 <label for="radio10">Maschio</label>
               </div>
-              <div class="form-check form-check-group">
+              <div class="form-check form-check-group" id="sexForm">
                 <input name="gruppo4" type="radio" id="female" value="female">
                 <label for="radio11">Femmina</label>
               </div>
@@ -431,7 +431,15 @@ $('#saveAnimal').click(function(event) {
   var name = $('input[name = "nameToAdd"]').val()
   var birth = document.getElementById("bdayToAdd").value;
   var type = document.getElementById("typeToAdd").value;
-  var sex= $('#sexForm option:selected').text();
+  //var sex= $('#sexForm option:selected').text();
+  var checkBox = document.getElementById("male");
+  if (checkBox.checked == true)
+  {
+    sex="Maschio"
+  }
+
+  else
+    sex="Femmina"
   var milkLitres = $('input[name = "milkLitresToAdd"]').val()
   var children = $('input[name = "childrenToAdd"]').val()
 
@@ -442,8 +450,9 @@ $('#saveAnimal').click(function(event) {
 
   var bday=new Date(parseInt(year),parseInt(month), parseInt(day)).toDateString()
 
-  console.log("Dati:"+name+birth+type+sex+milkLitres+children)
+  //console.log("Dati:"+name+birth+type+sex+milkLitres+children)
   var animal = new Animal ("q016w",name, type, bday, sex, milkLitres, children, 70,[70,71,71,81,69,70], {lat: 40.690140, lng: 14.714848},"Via Rotonda 4","Sta male")
+  register.addAnimal(animal)
 });
 
 $('#addAnotherAnimal').click(function(event) {

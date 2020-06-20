@@ -110,6 +110,14 @@ class Register {
 
         return this.list;
     }
+
+    addAnimal(animal) {
+        this.list.push(animal)
+        //console.log("Dati:"+animal.type+animal.sex+animal.lmilk+animal.children)
+        loadAnimal(animal, this.list)
+    }
+
+
     
 
     
