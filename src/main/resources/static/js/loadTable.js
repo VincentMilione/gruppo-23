@@ -60,6 +60,7 @@
         tr.append('<td name ="name">'+animal.name+'</td>')
         tr.append('<td name ="type">'+animal.type+'</td>')
         tr.append('<td name ="info"><button type="button" class="btn" data-toggle="modal" data-target="#infoModal" data-whatever="'+animal.tracker+'"><i class="fas fa-search-plus"  ></i></button></td>')
+        //controllo sul sesso: se "Femmina", viene data la possibilità di modifica
         if(animal.sex=="Femmina")
         tr.append('<td name ="modify"><button type="button" class="btn" data-toggle="modal" data-target="#modificaModal" data-whatever="'+animal.tracker+'"><i class="fas fa-pencil-alt"></i></button></td>')
         else
