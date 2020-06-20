@@ -102,12 +102,8 @@ class Register {
 
     //dato il gps, ricerca l'animale, risale all'indice e lo nasconde dal registro
     deleteAnimal(gps) {
-
-        console.log("Ciaoooo"+gps)
-
         var animal = this.getAnimal(gps)
         var index = this.list.indexOf(animal);
-       // this.list.splice(index,1);
     
         document.getElementById("register").children[1].children[index].style.display="none"
        

@@ -42,7 +42,7 @@
         <input class="form-control form-control-sm ml-3 " type="text" placeholder="Inserisci nome animale"
         aria-label="Search" name="srch" style="width: 70%; margin-right: 8px;">
         <button id="cerca" type="submit" class="form-control form-control" > Cerca</button>
-        <span><button id="aggiungi" type="submit" class="form-control form-control" > Aggiungi Nuovo Animale</button></span>
+        <span><button id="aggiungiAnimale" type="submit" class="form-control form-control" > Aggiungi Nuovo Animale</button></span>
     </form><br>
     
     <table id="register" class="table table-striped">
@@ -153,12 +153,141 @@
         <!--footer-->
         <div class="modal-footer">
           <button type="button" id="eliminaButton" class="btn btn-primary" data-dismiss="modal">Si</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >No</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!--Modal per messaggio di avvenuta eliminazione -->
+<div class="modal fade" id="messaggioModal" tabindex="-1" role="dialog" aria-labelledby="messaggioModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="messaggioModalLabel">Perfetto!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <strong id="animalName"></strong>
+          <label>e' stato eliminato correttamente dal registro!</label>
+      </div>
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--Modal per aggiunta animale -->
+<div class="modal fade" id="aggiungiAnimaleModal" tabindex="-1" role="dialog" aria-labelledby="aggiungiAnimaleModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="aggiungiAnimaleModalLabel">Aggiungi un nuovo animale</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <h6 id="firstForm">Dati iniziali</h6>
+        <i class="fas fa-chevron-right" id="breadcrumbs"></i>
+        <h6 id="secondForm" style="color:#C0C0C0">Dati avanzati</h6><br><br>
+        <label><strong> Codice GPS:</strong> </label>
+        <input id="gpsToAdd" name="gpsToAdd" value="q016w" readonly><br><br>
+        <label><strong>Nome</strong></label>
+        <input id="nameToAdd" name="nameToAdd" placeholder="Fiocco"><br><br>
+        <label><strong>Data di nascita</strong></label>
+        <input id="bdayToAdd" type="date"><br><br>
+        <label><strong>Tipo</strong></label>
+        <select name="typeToAdd" id="typeToAdd">
+          <option value="caprino">Caprino</option>
+          <option value="bovino">Bovino</option>
+          <option value="ovino">Ovino</option>
+        </select>
+  </div>
+      
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" id="goToSecondForm" class="btn btn-primary" data-dismiss="modal">Avanti</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--2° Modal per aggiunta animale -->
+<div class="modal fade" id="aggiungiAnimale2Modal" tabindex="-1" role="dialog" aria-labelledby="aggiungiAnimale2ModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="aggiungiAnimale2ModalLabel">Aggiungi un nuovo animale</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <h6 id="firstForm" style="color:#C0C0C0">Dati iniziali</h6>
+        <i class="fas fa-chevron-right" id="breadcrumbs"></i>
+        <h6 id="secondForm">Dati avanzati</h6><br><br>
+        <label><strong> Sesso:</strong> </label>
+         <span>
+            <div class="col-5" id="sexForm">
+              <div class="form-check form-check-group">
+                <input name="gruppo4" type="radio" id="male" value="male" checked>
+                <label for="radio10">Maschio</label>
+              </div>
+              <div class="form-check form-check-group">
+                <input name="gruppo4" type="radio" id="female" value="female">
+                <label for="radio11">Femmina</label>
+              </div>
+            </div>
+         </span>
+        <label><strong>Litri di latte</strong></label>
+        <input type="number" id="milkLitresToAdd" name="milkLitresToAdd" value=0 disabled><br><br>
+        <label><strong>Numero di parti</strong></label>
+        <input type="number" id="childrenToAdd" name="childrenToAdd" value=0 disabled><br><br>
+      </div>
+      
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" id="saveAnimal" class="btn btn-primary" data-dismiss="modal">Salva</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!--Modal per messaggio di avvenuta aggiunta -->
+<div class="modal fade" id="messaggioAggiuntaModal" tabindex="-1" role="dialog" aria-labelledby="messaggioAggiuntaModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="messaggioAggiuntaModalLabel">Perfetto!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+         <label>L'animale e' stato aggiunto al sistema!</label>
+      </div>
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Okay</button>
+          <button type="button" id="addAnotherAnimal" class="btn btn-primary" data-dismiss="modal">Aggiungi un altro animale</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script>
 $('document').ready(function() {
@@ -260,7 +389,73 @@ $('#eliminaButton').click(function (event){
   var gps = $('input[name = "gpsToDelete"]').val()
 
   register.deleteAnimal(gps);
+  $('#eliminaButton').val(register.getAnimal(gps).name)
+  $('#messaggioModal').modal('show')
 });
+
+$('#messaggioModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var gps = $(this).val // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  var animalName = $('#eliminaButton').val()
+
+  modal.find('.modal-body #animalName').text(animalName)
+});
+
+$('#aggiungiAnimale').click(function(event) {
+  $('#aggiungiAnimaleModal').modal('show')
+
+});
+
+$('#goToSecondForm').click(function(event) {
+  $('#aggiungiAnimale2Modal').modal('show')   
+
+});
+
+$('input[type=radio][name=gruppo4]').change(function() {
+    if (this.value == 'male') {
+      document.getElementById("childrenToAdd").setAttribute('disabled', 'disabled');
+      document.getElementById("milkLitresToAdd").setAttribute('disabled', 'disabled');
+    }
+    else if (this.value == 'female') {
+      document.getElementById("childrenToAdd").removeAttribute('disabled')
+      document.getElementById("milkLitresToAdd").removeAttribute('disabled')
+    }
+});
+
+$('#saveAnimal').click(function(event) {
+  $('#messaggioAggiuntaModal').modal('show')
+
+  var name = $('input[name = "nameToAdd"]').val()
+  var birth = document.getElementById("bdayToAdd").value;
+  var type = document.getElementById("typeToAdd").value;
+  var sex= $('#sexForm option:selected').text();
+  var milkLitres = $('input[name = "milkLitresToAdd"]').val()
+  var children = $('input[name = "childrenToAdd"]').val()
+
+  
+  var year=String(birth).substr(0,4)
+  var month=String(birth).substr(5,2)
+  var day=String(birth).substr(8)
+
+  var bday=new Date(parseInt(year),parseInt(month), parseInt(day)).toDateString()
+
+  console.log("Dati:"+name+birth+type+sex+milkLitres+children)
+  var animal = new Animal ("q016w",name, type, bday, sex, milkLitres, children, 70,[70,71,71,81,69,70], {lat: 40.690140, lng: 14.714848},"Via Rotonda 4","Sta male")
+});
+
+$('#addAnotherAnimal').click(function(event) {
+  $('#aggiungiAnimaleModal').modal('show')
+
+});
+
+
+
+
+
+
 
 
 $('#ricerca').submit(function(e){

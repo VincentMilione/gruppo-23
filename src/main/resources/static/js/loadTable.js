@@ -46,35 +46,4 @@
        
     }
 
-    function dropTable(tbId, list)
-    {
-        console.log("Sono i drop"+tbId)
-        
-            //inserisci la riga nella tabella
-        $("#"+tbId).find('tbody').css("display", "none")
-    
-    }
-
-  /*  function empty(tbId, list) {
-        //per ogni elemento
-        console.log("sono qua")
-        let cols = $('#'+tbId +' thead th')
-        pager(tbId, list)
-
-        list.forEach((el, index) => {
-            //crea una nuova riga per la tabella
-            let tr = $('<tr>')            
-            //se questo elemento è dopo il decimo della lista... non va visto
-            if (index >= 10) tr.css("display", "none")
-
-            //appendi tutti i dati
-            cols.each(function () {
-                var attr = $(this).attr("name")
-                
-                tr.append('<td name ="'+attr+'">'+el[attr]+'</td>')
-            });
-            
-            //inserisci la riga nella tabella
-            $("#"+tbId).find('tbody').append(tr);
-        });*/
     
