@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+	
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +16,73 @@
 			$("#navbar").load("header.html");
 		});
 	</script>
-</head>
+	<style>
+		
+		.bg-img-Home {
+		  background-image: url("img/sfondo.jpg");
+		  min-height: 675px;
+		  background-position: center;
+		  background-repeat: no-repeat;
+		  background-size: cover;
+		  position: relative;
+		}
+		
+		.contenitoreHome {
+		  position: absolute;
+		  border-radius: 25px;
+		  right: 0;
+		  margin: 20px;
+		  width: 450px;
+		  height:550px;
+		  padding: 16px;
+		  background-color: #c2f9ff;
+		}
+		.center {
+  			display: block;
+ 			margin-left: auto;
+ 			margin-right: auto;
+  			width: 50%;
+		}
 
- <body style="background-image: url('img/sfondo_home.jpg'); background-repeat: no-repeat; background-size: 100% ; z-index: -1;">
-  <div id="navbar"></div>
+		a:link, a:visited {
+  			color: black;
+  			text-decoration: none;
+		}
+
+		a:hover {
+  			color: black;
+  			text-decoration: none;
+		}
+		.icone{
+			padding:10%;
+		}
+		
+		</style>
+</head>
+<!--style="background-image: url('img/sfondo.jpg'); background-repeat: no-repeat; background-size: 100% ; z-index: -1;"-->
+ <body >
+<div id="navbar"></div>
+<div class="bg-img-Home">
+  <div class="contenitoreHome ">
+	<h1>Bentornato </h1>
+	<a class="nav-link center" href="findAnimal.html">
+		<i class="fas fa-map-marker-alt icone" style="font-size:60px;"></i>
+		<label>Trova il tuo animale</label>
+	</a>
+
+	<a class="nav-link center" href="register.html">
+		<i class="fas fa-book icone" style="font-size:60px;"></i>
+		<label>Registro dati</label>
+	</a>
+	
+	<a class="nav-link center" href="heartbeat-log.html">
+		<i class="fa fa-heartbeat icone" style="font-size:60px;"></i>
+		<label>Monitoraggio Battiti</label>
+	</a>
+	
+	
+  </div>
+</div>
 
 
 </body>
