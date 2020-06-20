@@ -16,54 +16,67 @@
 			$("#navbar").load("header.html");
 		});
 	</script>
-	<style>
-		
-		.bg-img-Home {
-		  background-image: url("img/sfondo.jpg");
-		  min-height: 675px;
-		  background-position: center;
-		  background-repeat: no-repeat;
-		  background-size: cover;
-		  position: relative;
-		}
-		
-		.contenitoreHome {
-		  position: absolute;
-		  border-radius: 25px;
-		  right: 0;
-		  margin: 20px;
-		  width: 450px;
-		  height:550px;
-		  padding: 16px;
-		  background-color: #c2f9ff;
-		}
-		.center {
-  			display: block;
- 			margin-left: auto;
- 			margin-right: auto;
-  			width: 50%;
-		}
 
-		a:link, a:visited {
-  			color: black;
-  			text-decoration: none;
-		}
-
-		a:hover {
-  			color: black;
-  			text-decoration: none;
-		}
-		.icone{
-			padding:10%;
-		}
+<style>
 		
-		</style>
+	.bg-img-Home {
+	  background-image: url("img/sfondo.jpg");
+	  min-height: 675px;
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	  position: relative;
+	}
+	
+	.contenitoreHome {
+	  position: absolute;
+	  border-radius: 25px;
+	  filter:alpha(opacity=50);
+      -moz-opacity: 0.8;
+      opacity: 0.7;
+	  right: 0;
+	  margin: 20px;
+	  width: 450px;
+	  height:550px;
+	  padding: 16px;
+	  background-color: #6bfa6b;
+	}
+
+	/*al passaggio del mouse deve essere bianco*/
+   .contenitoreHome:hover {
+	background-color: #6bfa6b;
+	filter:alpha(opacity=100);
+	-moz-opacity: 1.0;
+	opacity: 1.0;
+	}
+	.center {
+		  display: block;
+		 margin-left: auto;
+		 margin-right: auto;
+		  width: 50%;
+	}
+
+	a:link, a:visited {
+		  color: black;
+		  text-decoration: none;
+	}
+
+	a:hover {
+		  color: black;
+		  text-decoration: none;
+	}
+	.icone{
+		padding:10%;
+	}
+	
+	</style>
+	
 </head>
 <!--style="background-image: url('img/sfondo.jpg'); background-repeat: no-repeat; background-size: 100% ; z-index: -1;"-->
  <body >
 <div id="navbar"></div>
 <div class="bg-img-Home">
-  <div class="contenitoreHome ">
+  <div class="contenitoreHome">
 	<h1>Bentornato </h1>
 	<a class="nav-link center" href="findAnimal.html">
 		<i class="fas fa-map-marker-alt icone" style="font-size:60px;"></i>
