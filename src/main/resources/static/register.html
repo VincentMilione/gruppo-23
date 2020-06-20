@@ -267,7 +267,7 @@
   </div>
 
    <!--Modal per messaggio di avvenuta aggiunta -->
-<div class="modal fade" id="messaggioAggiuntaModal" tabindex="-1" role="dialog" aria-labelledby="messaggioAggiuntaModalLabel" aria-hidden="true" style="margin-top: 250px;">
+<div class="modal fade" id="messaggioAggiuntaModal" tabindex="-1" role="dialog" aria-labelledby="messaggioAggiuntaModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <!--Header-->
@@ -316,25 +316,26 @@
 <script>
 $('document').ready(function() {
   //getAnimal
-  var register = new Register();
-  loader("register",register.registerData());
+  $.getJSON("/api/getRegister", function(data) {
+    loader("register", registerData(data))
+  })
 
   $('#infoModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var gps = button.data('whatever') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  var animal = register.getAnimal(gps)
-
-  modal.find('.modal-title').text(animal.name)
-  modal.find('.modal-body #name').append(animal.name)
-  modal.find('.modal-body #gps').append(animal.tracker)
-  modal.find('.modal-body #bday').append(animal.bday)
-  modal.find('.modal-body #type').append(animal.type)
-  modal.find('.modal-body #sex').append(animal.sex)
-  modal.find('.modal-body #milk').append(animal.lmilk)
-  modal.find('.modal-body #children').append(animal.children)
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var gps = button.data('whatever') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    $.getJSON("/api/getAnimal", {id: gps},function (animal) {
+      modal.find('.modal-title').text(animal.name)
+      modal.find('.modal-body #name').append(animal.name)
+      modal.find('.modal-body #gps').append(animal.gps)
+      modal.find('.modal-body #bday').append(animal.bday)
+      modal.find('.modal-body #type').append(animal.type)
+      modal.find('.modal-body #sex').append(animal.sex)
+      modal.find('.modal-body #milk').append(animal.lmilk)
+      modal.find('.modal-body #children').append(animal.children)
+    })
 });
 
 //
@@ -357,12 +358,13 @@ $('#modificaModal').on('show.bs.modal', function (event) {
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  var animal = register.getAnimal(gps)
+  $.getJSON("/api/getAnimal", {id: gps},function (animal) {
 
-  modal.find('.modal-body #gps').val(animal.tracker)
+  modal.find('.modal-body #gps').val(animal.gps)
   modal.find('.modal-title').text(animal.name)
   modal.find('.modal-body #milkLitres').val(animal.lmilk);
   modal.find('.modal-body #numberChildren').val(animal.children)
+  })
 });
 
 //
@@ -379,12 +381,10 @@ $('#modifyButton').click(function (event){
   var modal = $(this)
   var gps = $('input[name = "gps"]').val()
 
-  var animal = register.getAnimal(gps) 
   var milkLitres = $('input[name = "litres"]').val()
   var children = $('input[name = "children"]').val()
   
-  register.update(gps, milkLitres,children)
-
+  $.post("/api/updateAnimal", {id:gps, ml: milkLitres, children: children})
 });
 
 $('#eliminaModal').on('show.bs.modal', function (event) {
@@ -393,11 +393,11 @@ $('#eliminaModal').on('show.bs.modal', function (event) {
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  var animal = register.getAnimal(gps)
-
-  modal.find('.modal-title').text("Attenzione!");
-  modal.find('.modal-body #gpsToDelete').val(animal.tracker)
-  modal.find('.modal-body #animalName').text(animal.name);
+  $.getJSON ("/api/getAnimal", {id: gps}, function (animal){
+    modal.find('.modal-title').text("Attenzione!")
+    modal.find('.modal-body #gpsToDelete').val(animal.gps)
+    modal.find('.modal-body #animalName').text(animal.name)
+  })
 });
 
 $('#eliminaModal').on('hidden.bs.modal', function (event) {
@@ -411,10 +411,10 @@ $('#eliminaModal').on('hidden.bs.modal', function (event) {
 $('#eliminaButton').click(function (event){
   var modal = $(this)
   var gps = $('input[name = "gpsToDelete"]').val()
-
-  register.deleteAnimal(gps);
-  $('#eliminaButton').val(register.getAnimal(gps).name)
+  
   $('#messaggioModal').modal('show')
+  $.post("/api/deleteAnimal", {id: gps})
+  $("td:contains('"+gps+"')").parent().remove()
 });
 
 $('#messaggioModal').on('show.bs.modal', function (event) {
@@ -430,7 +430,7 @@ $('#messaggioModal').on('show.bs.modal', function (event) {
 
 $('#aggiungiAnimale').click(function(event) {
   $('#aggiungiAnimaleModal').modal('show')
-
+  return false
 });
 
 $('#goToFirstForm').click(function(event) {
@@ -483,16 +483,17 @@ $('#saveAnimal').click(function(event) {
   var day=String(birth).substr(8)
 
   var bday=new Date(parseInt(year),parseInt(month), parseInt(day)).toDateString()
-
-  //console.log("Dati:"+name+birth+type+sex+milkLitres+children)
-  var animal = new Animal ("q016w",name, type, bday, sex, milkLitres, children, 70,[70,71,71,81,69,70], {lat: 40.690140, lng: 14.714848},"Via Rotonda 4","Sta male")
-  register.addAnimal(animal)
-
-  $('#nameToAdd').val('');
-  $('#bdayToAdd').val('');
-  $('#typeToAdd').val('Caprino');
-  $('#milkLitresToAdd').val('');
-  $('#childrenToAdd').val('');
+  var animal =  {gps:"q016w",name: name,type: type,bday: bday,sex: sex,lmilk: milkLitres,children: children, hrtbt: 70, hrtbtH: [70,71,71,81,69,70], cordinate: {lat: 40.690140, lng: 14.714848},address: "Via Rotonda 4", nota: "Nessuna nota"}
+  $.ajax({
+           dataType: "text",
+           url:"/api/addAnimal",
+           headers:{
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json'
+           },
+           data:JSON.stringify(animal),
+           type:'POST'
+       })
 });
 
 $('#stopAddAnimal').click(function(event) {
@@ -503,8 +504,6 @@ $('#stopAddAnimal').click(function(event) {
   $('#childrenToAdd').val('0');
   $('#typeToAdd').val('Caprino');
   $('#male').prop('checked', true);
-
-
 });
 
 $('#stopAddAnimal2').click(function(event) {

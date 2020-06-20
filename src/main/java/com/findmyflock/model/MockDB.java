@@ -56,6 +56,10 @@ public class MockDB {
         return map;
      }
 
+    public void addAnimal (Animal e) {
+        list.add(e);
+    }
+
     public Animal getAnimal (String gps) {
         return list.get(list.indexOf(new Animal(gps)));
     }

@@ -118,9 +118,7 @@
     //getAnimal
 
     $('document').ready(function () {
-
-      let list = []
-      let register
+      
       $.getJSON('/api/getRegister', { id: 'q001w' }, function (data) {
         loader("heart", heartBeatLog(data))
       })
