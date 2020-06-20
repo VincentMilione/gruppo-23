@@ -190,7 +190,7 @@
       <!--Header-->
       <div class="modal-header">
         <h5 class="modal-title" id="aggiungiAnimaleModalLabel">Aggiungi un nuovo animale</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" id="stopAddAnimal" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -202,20 +202,20 @@
         <label><strong> Codice GPS:</strong> </label>
         <input id="gpsToAdd" name="gpsToAdd" value="q016w" readonly><br><br>
         <label><strong>Nome</strong></label>
-        <input id="nameToAdd" name="nameToAdd" placeholder="Fiocco"><br><br>
+        <input id="nameToAdd" name="nameToAdd" placeholder="Fiocco" maxlength="10"><br><br>
         <label><strong>Data di nascita</strong></label>
         <input id="bdayToAdd" type="date"><br><br>
         <label><strong>Tipo</strong></label>
         <select name="typeToAdd" id="typeToAdd">
-          <option value="caprino">Caprino</option>
-          <option value="bovino">Bovino</option>
-          <option value="ovino">Ovino</option>
+          <option value="Caprino">Caprino</option>
+          <option value="Bovino">Bovino</option>
+          <option value="Ovino">Ovino</option>
         </select>
   </div>
       
         <!--footer-->
         <div class="modal-footer">
-          <button type="button" id="goToSecondForm" class="btn btn-primary" data-dismiss="modal">Avanti</button>
+          <button type="button" id="goToSecondForm" class="btn btn-primary">Avanti</button>
         </div>
       </div>
     </div>
@@ -229,7 +229,7 @@
       <!--Header-->
       <div class="modal-header">
         <h5 class="modal-title" id="aggiungiAnimale2ModalLabel">Aggiungi un nuovo animale</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" id="stopAddAnimal2" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -240,12 +240,12 @@
         <h6 id="secondForm">Dati avanzati</h6><br><br>
         <label><strong> Sesso:</strong> </label>
          <span>
-            <div class="col-5" id="sexForm">
-              <div class="form-check form-check-group">
+            <div class="col-5" >
+              <div class="form-check form-check-group" id="sexForm">
                 <input name="gruppo4" type="radio" id="male" value="male" checked>
                 <label for="radio10">Maschio</label>
               </div>
-              <div class="form-check form-check-group">
+              <div class="form-check form-check-group" id="sexForm">
                 <input name="gruppo4" type="radio" id="female" value="female">
                 <label for="radio11">Femmina</label>
               </div>
@@ -259,6 +259,7 @@
       
         <!--footer-->
         <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="goToFirstForm" data-dismiss="modal" >Modifica dati iniziali</button>
           <button type="button" id="saveAnimal" class="btn btn-primary" data-dismiss="modal">Salva</button>
         </div>
       </div>
@@ -284,6 +285,29 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal" >Okay</button>
           <button type="button" id="addAnotherAnimal" class="btn btn-primary" data-dismiss="modal">Aggiungi un altro animale</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+     <!--Modal per esortare a riempire tutti i campi -->
+<div class="modal fade" id="messaggioRiempiModal" tabindex="-1" role="dialog" aria-labelledby="messaggioRiempiModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="messaggioRiempiModalLabel">Attenzione!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+         <label>Devi riempire tutti i campi per poter andare avanti!</label>
+      </div>
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Okay</button>
         </div>
       </div>
     </div>
@@ -409,8 +433,20 @@ $('#aggiungiAnimale').click(function(event) {
 
 });
 
+$('#goToFirstForm').click(function(event) {
+  $('#aggiungiAnimaleModal').modal('show')   
+
+});
+
 $('#goToSecondForm').click(function(event) {
-  $('#aggiungiAnimale2Modal').modal('show')   
+  if($('input[name = "nameToAdd"]').val() == "" ||  document.getElementById("bdayToAdd").value=="")
+    $('#messaggioRiempiModal').modal('show')     
+
+  else
+  { 
+    $('#aggiungiAnimaleModal').modal('hide')
+    $('#aggiungiAnimale2Modal').modal('show')
+  }
 
 });
 
@@ -431,7 +467,13 @@ $('#saveAnimal').click(function(event) {
   var name = $('input[name = "nameToAdd"]').val()
   var birth = document.getElementById("bdayToAdd").value;
   var type = document.getElementById("typeToAdd").value;
-  var sex= $('#sexForm option:selected').text();
+  //var sex= $('#sexForm option:selected').text();
+  var checkBox = document.getElementById("male");
+  if (checkBox.checked == true)
+    sex="Maschio"
+  
+  else
+    sex="Femmina"
   var milkLitres = $('input[name = "milkLitresToAdd"]').val()
   var children = $('input[name = "childrenToAdd"]').val()
 
@@ -442,20 +484,44 @@ $('#saveAnimal').click(function(event) {
 
   var bday=new Date(parseInt(year),parseInt(month), parseInt(day)).toDateString()
 
-  console.log("Dati:"+name+birth+type+sex+milkLitres+children)
+  //console.log("Dati:"+name+birth+type+sex+milkLitres+children)
   var animal = new Animal ("q016w",name, type, bday, sex, milkLitres, children, 70,[70,71,71,81,69,70], {lat: 40.690140, lng: 14.714848},"Via Rotonda 4","Sta male")
+  register.addAnimal(animal)
+
+  $('#nameToAdd').val('');
+  $('#bdayToAdd').val('');
+  $('#typeToAdd').val('Caprino');
+  $('#milkLitresToAdd').val('');
+  $('#childrenToAdd').val('');
+});
+
+$('#stopAddAnimal').click(function(event) {
+  $('#nameToAdd').val('');
+  $('#bdayToAdd').val('');
+  $('#typeToAdd').val('');
+  $('#milkLitresToAdd').val('0');
+  $('#childrenToAdd').val('0');
+  $('#typeToAdd').val('Caprino');
+  $('#male').prop('checked', true);
+
+
+});
+
+$('#stopAddAnimal2').click(function(event) {
+  $('#nameToAdd').val('');
+  $('#bdayToAdd').val('');
+  $('#typeToAdd').val('');
+  $('#milkLitresToAdd').val('0');
+  $('#childrenToAdd').val('0');
+  $('#typeToAdd').val('Caprino');
+  $('#male').prop('checked', true);
+
 });
 
 $('#addAnotherAnimal').click(function(event) {
   $('#aggiungiAnimaleModal').modal('show')
 
 });
-
-
-
-
-
-
 
 
 $('#ricerca').submit(function(e){
