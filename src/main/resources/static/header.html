@@ -3,6 +3,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
+      <li class="nav-item my-li"><button type="button" class="btn" data-toggle="modal" data-target="#helpModal" data-toggle="tooltip" data-placement="top" title="Clicca per avere suggerimenti!"><i class="fas fa-info"></i></button></li>
       <li class="nav-item my-li"><a class="nav-link" href="findAnimal.html">Trova il tuo animale</a></li>
       <li class="nav-item my-li"><a class="nav-link" href="register.html">Registro Dati</a></li>
       <li class="nav-item my-li"><a class="nav-link" href="heartbeat-log.html">Monitoraggio Battiti</a></li>
@@ -20,4 +21,87 @@
   </div>
 </nav>
 
+ <!--Modal per fornire aiuto all'utente -->
+ <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="helpModalLabel">Suggerimento!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <label id="help" name="help"></label>
+        <label id="helpButton" name="helpButton"></label>
+        <label id="help2" name="help2"></label>
+        
+        <label id="help3" name="help3"></label>
+        <label id="helpButton1" name="helpButton1"></label>
+        <label id="help4" name="help4"></label>
+
+        <label id="help5" name="help5"></label>
+        <label id="helpButton2" name="helpButton2"></label>
+        <label id="help6" name="help6"></label>
+      </div>
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('document').ready(function() {
     
+      $('#helpModal').on('show.bs.modal', function (event) {
+        var origin   = window.location.pathname;
+        if(origin=='/heartbeat-log.html')
+        {
+        $('#help').text("Clicca su");
+        var buttonDettagli= $('<button type="button" class="btn btn-primary">Dettagli</button>');
+        $("#helpButton").append(buttonDettagli);
+        $('#help2').text("per visualizzare i dettagli dell'animale!");
+        }
+
+        if(origin=='/register.html')
+        {
+        $('#help').text("Clicca su");
+        var buttonInfo= $('<button type="button" class="btn"><i class="fas fa-search-plus"></i></button>');
+        $("#helpButton").append(buttonInfo);
+        $('#help2').text("per visualizzare tutte le informazioni dell'animale!");
+
+        $('#help3').text("Clicca su");
+        var buttonModify= $('<button type="button" class="btn"><i class="fas fa-pencil-alt"></i></button>');
+        $("#helpButton1").append(buttonModify);
+        $('#help4').text("per modificare i dati dell'animale nel registro!");
+
+        $('#help5').text("Clicca su");
+        var buttonDelete= $('<button type="button" class="btn"><i class="fas fa-times"></i></button>');
+        $("#helpButton2").append(buttonDelete);
+        $('#help6').text("per eliminare l'animale dal registro!");
+        }
+
+        if(origin=='/findAnimal.html')
+        {
+        $('#help').text("Clicca su");
+        var buttonDettagli= $('<button type="button" class="btn"><i class="fas fa-map-marker-alt"></i></button>');
+        $("#helpButton").append(buttonDettagli);
+        $('#help2').text("per visualizzare la posizione dell'animale!");
+
+        $('#help3').text("Oppure clicca sul nome dell'animale");
+        $('#help4').text("per trovare la posizione!");
+
+
+
+        }
+
+
+      
+    });
+  });
+
+   </script> 
