@@ -215,7 +215,7 @@
       
         <!--footer-->
         <div class="modal-footer">
-          <button type="button" id="goToSecondForm" class="btn btn-primary" data-dismiss="modal">Avanti</button>
+          <button type="button" id="goToSecondForm" class="btn btn-primary">Avanti</button>
         </div>
       </div>
     </div>
@@ -285,6 +285,29 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal" >Okay</button>
           <button type="button" id="addAnotherAnimal" class="btn btn-primary" data-dismiss="modal">Aggiungi un altro animale</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+     <!--Modal per esortare a riempire tutti i campi -->
+<div class="modal fade" id="messaggioRiempiModal" tabindex="-1" role="dialog" aria-labelledby="messaggioRiempiModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="messaggioRiempiModalLabel">Attenzione!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+         <label>Devi riempire tutti i campi per poter andare avanti!</label>
+      </div>
+        <!--footer-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Okay</button>
         </div>
       </div>
     </div>
@@ -416,7 +439,14 @@ $('#goToFirstForm').click(function(event) {
 });
 
 $('#goToSecondForm').click(function(event) {
-  $('#aggiungiAnimale2Modal').modal('show')   
+  if($('input[name = "nameToAdd"]').val() == "" ||  document.getElementById("bdayToAdd").value=="")
+    $('#messaggioRiempiModal').modal('show')     
+
+  else
+  { 
+    $('#aggiungiAnimaleModal').modal('hide')
+    $('#aggiungiAnimale2Modal').modal('show')
+  }
 
 });
 
