@@ -1,4 +1,13 @@
+function heartBeatLog(list){
+    let l = []
+    list.forEach(e => {
+        var btn = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="'+e.gps+'">Dettagli</button>';
+        var item = {gps: e.gps, name: e.name, type: e.type, beat: e.hrtbt, details: btn};
+        l.push(item);
+    });
 
+    return l;
+}
     //prendo dal registro le info da inserire nella tabella
     function pager (tbid, list) {
         //resettare il coso della paginazione

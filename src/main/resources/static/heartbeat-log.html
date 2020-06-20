@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/stile.css" type = "text/css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>Heartbeat Log</title>
-	<script>
-		$(function(){
-			$("#navbar").load("header.html");
-		});
+  <link rel="stylesheet" href="css/stile.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <title>Heartbeat Log</title>
+  <script>
+    $(function () {
+      $("#navbar").load("header.html");
+    });
   </script>
 </head>
+
 <body>
-<div id= navbar></div>
-<div class="contorno" style="background-image: url('img/bg_1.jpg'); z-index: -1;">
-  <div class="container">
-    <div class="row no-gutters slider-text align-items-center justify-content-center">
-      <div class="col-md-9 ftco-animate text-center">
-        <h1 class="mb-0 bread">Monitoraggio battiti</h1>
+  <div id=navbar></div>
+  <div class="contorno" style="background-image: url('img/bg_1.jpg'); z-index: -1;">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+          <h1 class="mb-0 bread">Monitoraggio battiti</h1>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<hr>
+  <hr>
 
 
-<div class="container">
+  <div class="container">
     <!-- Search form -->
-    <form id = "ricerca" class="form-inline d-flex justify-content-center md-form form-sm mb-2">
-        <i class="fas fa-search" aria-hidden="true"></i>
-        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
+    <form id="ricerca" class="form-inline d-flex justify-content-center md-form form-sm mb-2">
+      <i class="fas fa-search" aria-hidden="true"></i>
+      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Inserisci nome animale"
         aria-label="Search" name="srch" style="margin-right: 8px;">
-        <button id="cerca" type="submit" class="form-control form-control" > Cerca</button>
+      <button id="cerca" type="submit" class="form-control form-control"> Cerca</button>
     </form>
     <table id="heart" class="table table-striped">
       <thead>
@@ -58,11 +61,12 @@
   <div class="container">
     <ul class="pagination justify-content-center">
       <li class="page-item disabled"><a class="page-link" href="#">Pagina</a></li>
-      
+
     </ul>
   </div>
-<!--Modal per le info-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px;">
+  <!--Modal per le info-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="margin-top: 250px;">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <!--Header-->
@@ -75,13 +79,13 @@
         <!--il corpo-->
         <div class="modal-body">
           <label><strong>Codice GPS:</strong> </label>
-          <label id = "gps"></label><br>
+          <label id="gps"></label><br>
           <label><strong>Tipo:</strong> </label>
-          <label id = "type"></label><br>
+          <label id="type"></label><br>
           <label><strong>Battiti:</strong> </label>
-          <label id = "heartbeat"></label><br>
+          <label id="heartbeat"></label><br>
           <label><strong>Storico:</strong> </label>
-          <table id = "history" class="table table-striped">
+          <table id="history" class="table table-striped">
             <thead>
               <tr>
                 <th>Lun</th>
@@ -94,11 +98,11 @@
               </tr>
             </thead>
             <tbody>
-          
+
             </tbody>
           </table>
-         <label><strong>Note:</strong>  </label> 
-        <label id = "note"></label>
+          <label><strong>Note:</strong> </label>
+          <label id="note"></label>
 
         </div>
         <!--footer-->
@@ -108,79 +112,86 @@
       </div>
     </div>
   </div>
-<script src="js/animal.js"></script>
-<script src = "js/loadTable.js"></script>
-<script src = "js/search.js"></script>
-<script>
-$('document').ready(function() {
-  //getAnimal
-  var register = new Register();
-  loader("heart",register.heartBeatLog());
+  <script src="js/animal.js"></script>
+  <script src="js/loadTable.js"></script>
+  <script src="js/search.js"></script>
+  <script>
+    //getAnimal
 
-  $('#exampleModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var gps = button.data('whatever') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  var animal = register.getAnimal(gps)
+    $('document').ready(function () {
 
-  var tr = $('<tr>')
+      let list = []
+      let register
+      $.getJSON('/api/getRegister', { id: 'q001w' }, function (data) {
+        loader("heart", heartBeatLog(data))
+      })
 
-    tr.append('<td>'+animal.hrtbtH[0]+'</td>')
-        .append('<td>'+animal.hrtbtH[1]+'</td>')
-        .append('<td>'+animal.hrtbtH[2]+'</td>')
-        .append('<td>'+animal.hrtbtH[3]+'</td>')
-        .append('<td>'+animal.hrtbtH[4]+'</td>')
-        .append('<td>'+animal.hrtbtH[5]+'</td>')
-        .append('<td>'+animal.hrtbt+'</td>')
+      $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var gps = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        $.getJSON('/api/getAnimal', {id: gps}, function (animal) {
+          var tr = $('<tr>')
 
-  modal.find('.modal-title').text(animal.name)
-  modal.find('.modal-body #name').append(animal.name)
-  modal.find('.modal-body #gps').append(animal.tracker)
-  modal.find('.modal-body #type').append(animal.type)
-  modal.find('.modal-body #heartbeat').append(animal.hrtbt)
-  modal.find('.modal-body #history').find('tbody').append(tr)
-  modal.find('.modal-body #note').append(animal.note)
-  
-});
+          tr.append('<td>' + animal.hrtbtH[0] + '</td>')
+            .append('<td>' + animal.hrtbtH[1] + '</td>')
+            .append('<td>' + animal.hrtbtH[2] + '</td>')
+            .append('<td>' + animal.hrtbtH[3] + '</td>')
+            .append('<td>' + animal.hrtbtH[4] + '</td>')
+            .append('<td>' + animal.hrtbtH[5] + '</td>')
+            .append('<td>' + animal.hrtbt + '</td>')
 
-//
-$('#exampleModal').on('hidden.bs.modal', function (event) {
-  var modal = $(this)
+          modal.find('.modal-title').text(animal.name)
+          modal.find('.modal-body #name').append(animal.name)
+          modal.find('.modal-body #gps').append(animal.tracker)
+          modal.find('.modal-body #type').append(animal.type)
+          modal.find('.modal-body #heartbeat').append(animal.hrtbt)
+          modal.find('.modal-body #history').find('tbody').append(tr)
+          modal.find('.modal-body #note').append(animal.note)
+        })
+      });
 
-  modal.find('.modal-title').text("")
-  modal.find('.modal-body #name').html("")
-  modal.find('.modal-body #gps').html("")
-  modal.find('.modal-body #type').html("")
-  modal.find('.modal-body #heartbeat').html("")
-  modal.find('.modal-body #history').find('tbody').html("")
-  modal.find('.modal-body #note').html("")
-});
+      //
+      $('#exampleModal').on('hidden.bs.modal', function (event) {
+        var modal = $(this)
 
-//paginare la lista e creare le sezioni delle pagine(di conseguenza attaccare anche dei listener dei bottoni)
+        modal.find('.modal-title').text("")
+        modal.find('.modal-body #name').html("")
+        modal.find('.modal-body #gps').html("")
+        modal.find('.modal-body #type').html("")
+        modal.find('.modal-body #heartbeat').html("")
+        modal.find('.modal-body #history').find('tbody').html("")
+        modal.find('.modal-body #note').html("")
+      });
+
+      //paginare la lista e creare le sezioni delle pagine(di conseguenza attaccare anche dei listener dei bottoni)
 
 
-$('#ricerca').submit(function(e){
+      $('#ricerca').submit(function (e) {
         //fare un filter su elementi che possiedono nell'html una substring del nome dell'animale
-        let list = register.heartBeatLog()
-        let page = []
-        $('#heart tbody tr').remove()
+        $.getJSON('/api/getRegister', { id: 'q001w' }, function (list) {
       
-        list.forEach(e =>{
-            let str = (e.name)
-            let srch = ($('input[name = "srch"]').val())
-           
-            if(str.match(srch) || str.toLowerCase().match(srch) || str.toLowerCase().includes(srch.toLowerCase())){
-                page.push(e)
-            }
+          let page = []
+          $('#heart tbody tr').remove()
+
+        list.forEach(e => {
+          let str = (e.name)
+          let srch = ($('input[name = "srch"]').val())
+
+          if (str.match(srch) || str.toLowerCase().match(srch) || str.toLowerCase().includes(srch.toLowerCase())) {
+            page.push(e)
+          }
         });
 
         loader("heart", page)
+        })
         return false;
         //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin
-    })
-});
-</script>
+      })
+    });
+  </script>
 </body>
+
 </html>

@@ -389,6 +389,7 @@ $('#eliminaButton').click(function (event){
   var gps = $('input[name = "gpsToDelete"]').val()
 
   register.deleteAnimal(gps);
+  $.post("/api/deleteAnimal",{id: gps})
   $('#eliminaButton').val(register.getAnimal(gps).name)
   $('#messaggioModal').modal('show')
 });
