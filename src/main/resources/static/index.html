@@ -20,6 +20,10 @@
  <body style="background-image: url('img/sfondo_home.jpg'); background-repeat: no-repeat; background-size: 100% ; z-index: -1;">
   <div id="navbar"></div>
 
-
+<script>
+	$.getJSON('/api/getAnimal', {id: 'q001w'}, function (data) {
+		console.log (data);
+	})
+</script>
 </body>
 </html>
