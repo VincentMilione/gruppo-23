@@ -119,7 +119,7 @@
 
     $('document').ready(function () {
       
-      $.getJSON('/api/getRegister', { id: 'q001w' }, function (data) {
+      $.getJSON('/api/getRegister', function (data) {
         loader("heart", heartBeatLog(data))
       })
 

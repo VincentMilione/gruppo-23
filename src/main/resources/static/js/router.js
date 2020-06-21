@@ -1,8 +1,14 @@
+let myLatLng = {lat: 40.6978202, lng: 14.7390583}
+let ignore = false
+let markers = []
+let map
+let circle
+let directionsDisplay
+let directionsService 
+
 function route(map, start, end){
     var directions = {start: start, end: end};
-    var directionsDisplay = new google.maps.DirectionsRenderer();
-    var directionsService = new google.maps.DirectionsService();
-
+    
     directionsService.route({
     origin:directions.start,
     destination: directions.end,
@@ -20,13 +26,9 @@ function(result, status) {
 });
 }	
 
-let myLatLng = {lat: 40.6978202, lng: 14.7390583}
-let ignore = false
-let register = new Register()
-let list = register.list
-let map
-let circle
-
+function deRoute() {
+    directionsDisplay.setMap(null)
+}
 
 //crea la lista (dentro raggio e fuori raggio)
 function createList () {
@@ -34,20 +36,19 @@ function createList () {
     let in_ = $('#in')
     let out_ = $('#out')
 
-    list.forEach(function(e){
+    markers.forEach(function(e){
 
         let str = $('<li class="list-group-item"></li>')
-        let div = $('<div id="'+e.tracker+'">'+e.name+'<div>')
+        let div = $('<div id="'+e.animal.gps+'">'+e.animal.name+'<div>')
         div.click(function () {
-            let animal= register.getAnimal($(this).attr('id'))
-             map.setCenter(animal.marker.getPosition())
+            map.setCenter(e.getPosition())
             map.setZoom(20)
-            $('#addresses').val(animal.address)
+            $('#addresses').val(e.animal.address)
            
         })
 
         str.append(div)
-        if(e.marker.getIcon() == null){
+        if(e.getIcon() == null){
             str.css("color", "red")
             out_.append(str)
         } else{
@@ -67,7 +68,7 @@ function insideRay (marker, ray) {
     }
 }
 
-function createMarkers() {
+function createMarkers(list) {
 
     list.forEach(function(e) {
         let cor = e.cordinate
@@ -75,29 +76,45 @@ function createMarkers() {
         let marker = new google.maps.Marker({
                 position: cor,
                 map: map,
-            
+                animal: e
             });
         
-        e.marker = marker
         insideRay(marker, circle.getRadius())
 
         var infowindow = new google.maps.InfoWindow({
             content:e.name,
-            address:e.address,
             map: map
         });
 
         google.maps.event.addListener(marker, 'click', function() {
             //qui per aggiungere la cosa per il routing
-            
+            $('#box').toggle()
             infowindow.open(map,marker);
-            document.getElementById("addresses").value = infowindow.address;
+            document.getElementById("addresses").value = marker.animal.address;
+            $('#percorso').click(function () {
+                //dobbiamo staccare il listener ed attaccare uno che cancella il percorso
+                if("Individua percorso" == $(this).html()) {
+                    $(this).html("Cancella percorso")
+                    $("#cross").hide()
+                    route(map, myLatLng, marker.getPosition())
+                } else {
+                    $(this).html("Individua percorso")
+                    $("#cross").show()
+                    deRoute()
+                }
+            
+            })
         });
+
+        markers.push(marker)
     })
 }
 
 //funzione per inizializzare la mappa
 function myMap() {
+
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsService = new google.maps.DirectionsService();
 
     //mappa
     map = new google.maps.Map(document.getElementById('googleMap'), {
@@ -119,35 +136,34 @@ function myMap() {
         map: map
     });
     
-    createMarkers()
-    createList()
+    $.getJSON('/api/getRegister', function (list) {
+        createMarkers(list)
+        createList()
+       
+        google.maps.event.addListener(circle, 'radius_changed', function() {
+            markers.forEach(function(e){
+                insideRay(e, circle.getRadius())
+            })
+            $("#in").empty()
+            $("#out").empty()
+            createList()
+        });
+        
+        google.maps.event.addListener(circle, 'center_changed', function() {
+            if (ignore){
+                ignore = false;
+                return;
+            }
+            circle.setEditable(false);
+            ignore = true;
+            circle.setCenter(myLatLng);
+            circle.setEditable(true);
+        }); 
+      })
+      
 
-    google.maps.event.addListener(circle, 'radius_changed', function() {
-        list.forEach(function(e){
-            insideRay(e.marker, circle.getRadius())
-
-            let li = $('#'+e.tracker)
-
-            if (e.marker.getIcon() == null && li.parent().attr('id') == 'out') {
-                $('#out #' +e.tracker).remove() 
-                $('#in').append(li)
-            } else if (e.marker.getIcon() != null && li.parent().attr('id') == 'in') {
-                $('#in #' +e.tracker).remove() 
-                $('#out').append(li)
-            }     
-        })
-    });
-
-
-    
-    google.maps.event.addListener(circle, 'center_changed', function() {
-        if (ignore){
-            ignore = false;
-            return;
-        }
-        circle.setEditable(false);
-        ignore = true;
-        circle.setCenter(myLatLng);
-        circle.setEditable(true);
-    });
+   
 }
+
+
+
