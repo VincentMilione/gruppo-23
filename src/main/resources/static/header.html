@@ -3,7 +3,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item my-li"><button type="button" class="btn" data-toggle="modal" data-target="#helpModal" data-toggle="tooltip" data-placement="top" title="Clicca per avere suggerimenti!"><i class="fas fa-info"></i></button></li>
+      <li class="nav-item my-li"><button type="button" id="showHint" class="btn" data-toggle="modal" data-target="#helpModal" data-toggle="tooltip" data-placement="top" title="Clicca per avere suggerimenti!"><i class="fas fa-info"></i></button></li>
       <li class="nav-item my-li"><a class="nav-link" href="findAnimal.html">Trova il tuo animale</a></li>
       <li class="nav-item my-li"><a class="nav-link" href="register.html">Registro Dati</a></li>
       <li class="nav-item my-li"><a class="nav-link" href="heartbeat-log.html">Monitoraggio Battiti</a></li>
@@ -59,6 +59,12 @@
     
       $('#helpModal').on('show.bs.modal', function (event) {
         var origin   = window.location.pathname;
+
+        //se ti trovi nella home
+        if(origin=='/')
+        $('#help').text("Clicca su una delle 3 icone disponibili per navigare nel sito!");
+
+        //se ti trovi nella pagina di monitoraggio battiti
         if(origin=='/heartbeat-log.html')
         {
         $('#help').text("Clicca su");
@@ -67,6 +73,7 @@
         $('#help2').text("per visualizzare i dettagli dell'animale!");
         }
 
+        //se ti trovi nella pagina del registro
         if(origin=='/register.html')
         {
         $('#help').text("Clicca su");
@@ -85,6 +92,7 @@
         $('#help6').text("per eliminare l'animale dal registro!");
         }
 
+        //se ti trovi nella pagina di ricerca animale
         if(origin=='/findAnimal.html')
         {
         $('#help').text("Clicca su");
