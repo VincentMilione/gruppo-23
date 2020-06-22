@@ -46,8 +46,10 @@ function createList () {
 
         let str = $('<li class="list-group-item"></li>')
         let div = $('<div id="'+e.animal.gps+'">'+e.animal.name+'<div>')
+        div.hover(function(){ $(this).css('cursor','pointer')}, function () {$(this).css('cursor','auto')})
         div.click(function () {
-            new google.maps.event.trigger(e, 'click' );
+            if($("#percorso").html() != "Cancella percorso")
+                new google.maps.event.trigger(e, 'click');
         })
 
         str.append(div)
