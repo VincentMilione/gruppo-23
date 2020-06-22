@@ -58,3 +58,7 @@
 #breadcrumbs, #firstForm, #secondForm{
     display:inline-block;
 }
+
+.basesimbol:hover {
+    color: blue;
+}

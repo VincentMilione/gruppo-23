@@ -167,7 +167,7 @@
 
       $('#ricerca').submit(function (e) {
         //fare un filter su elementi che possiedono nell'html una substring del nome dell'animale
-        $.getJSON('/api/getRegister', { id: 'q001w' }, function (list) {
+        $.getJSON('/api/getRegister', function (list) {
       
           let page = []
           $('#heart tbody tr').remove()
@@ -181,7 +181,7 @@
           }
         });
 
-        loader("heart", page)
+        loader("heart", heartBeatLog(page))
         })
         return false;
         //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin

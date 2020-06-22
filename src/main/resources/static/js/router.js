@@ -10,6 +10,9 @@ function resetBox (){
     $('#addresses').val('')
     $('#percorso').off()
     $('#box').hide()
+
+    map.setCenter(myLatLng)
+    map.setZoom(13)
   }
 
 function route(map, start, end){
@@ -44,21 +47,19 @@ function createList () {
 
     markers.forEach(function(e){
 
-        let str = $('<li class="list-group-item"></li>')
-        let div = $('<div id="'+e.animal.gps+'">'+e.animal.name+'<div>')
-        div.hover(function(){ $(this).css('cursor','pointer')}, function () {$(this).css('cursor','auto')})
+        let div = $('<button class="list-group-item list-group-item-action" id="'+e.animal.gps+'">'+e.animal.name+'</button>')
+        
         div.click(function () {
             if($("#percorso").html() != "Cancella percorso")
                 new google.maps.event.trigger(e, 'click');
         })
 
-        str.append(div)
         if(e.getIcon() == null){
-            str.css("color", "red")
-            out_.append(str)
+            div.css("color", "red")
+            out_.append(div)
         } else{
-            str.css("color", "green")
-            in_.append(str)
+            div.css("color", "green")
+            in_.append(div)
         }
     })
 }
@@ -97,6 +98,8 @@ function createMarkers(list) {
             $('#box').toggle()
             infowindow.open(map,marker);
             document.getElementById("addresses").value = marker.animal.address;
+            map.setCenter(marker.getPosition())
+            map.setZoom(15)
             $('#percorso').click(function () {
                 //dobbiamo staccare il listener ed attaccare uno che cancella il percorso
                 if("Individua percorso" == $(this).html()) {

@@ -522,26 +522,27 @@ $('#addAnotherAnimal').click(function(event) {
 
 });
 
-
-$('#ricerca').submit(function(e){
+    $('#ricerca').submit(function (e) {
         //fare un filter su elementi che possiedono nell'html una substring del nome dell'animale
-        let list = register.registerData()
-        let page = []
-        $('#register tbody tr').remove()
+        $.getJSON('/api/getRegister', function (list) {
       
-        list.forEach(e =>{
-            let str = e.name
-            let srch = $('input[name = "srch"]').val()
-           
-            if(str.match(srch) || str.toLowerCase().match(srch) || str.toLowerCase().includes(srch.toLowerCase())){
-                page.push(e)
-            }
+          let page = []
+          $('#register tbody tr').remove()
+
+        list.forEach(e => {
+          let str = (e.name)
+          let srch = ($('input[name = "srch"]').val())
+
+          if (str.match(srch) || str.toLowerCase().match(srch) || str.toLowerCase().includes(srch.toLowerCase())) {
+            page.push(e)
+          }
         });
 
-        loader("register", page)
-        return false
+        loader("register", registerData(page))
+        })
+        return false;
         //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin
-    });
+      })
  });
 </script>
 </body>

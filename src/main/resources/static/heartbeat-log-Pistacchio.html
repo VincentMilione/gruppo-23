@@ -64,8 +64,9 @@
 
     </ul>
   </div>
-<!--Modal per le info-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 180px;">
+  <!--Modal per le info-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="margin-top: 180px;">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <!--Header-->
@@ -118,7 +119,7 @@
     //getAnimal
 
     $('document').ready(function () {
-      
+
       $.getJSON('/api/getRegister', function (data) {
         loader("heart", heartBeatLog(data))
       })
@@ -129,15 +130,15 @@
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
-        $.getJSON('/api/getAnimal', {id: gps}, function (animal) {
+        $.getJSON('/api/getAnimal', { id: gps }, function (animal) {
           var tr = $('<tr>')
 
           animal.hrtbtH.push(animal.hrtbt)
-          for(let i = 0; i<7; i++) {
-            if(animal.hrtbtH[i]>=90)
-              tr.append('<td style="color: red">' + animal.hrtbtH[i] + '</td>')    
+          for (let i = 0; i < 7; i++) {
+            if (animal.hrtbtH[i] >= 90)
+              tr.append('<td style="color: red">' + animal.hrtbtH[i] + '</td>')
             else
-              tr.append('<td>' + animal.hrtbtH[i] + '</td>')    
+              tr.append('<td>' + animal.hrtbtH[i] + '</td>')
           }
 
 
@@ -169,32 +170,32 @@
 
       $('#ricerca').submit(function (e) {
         //fare un filter su elementi che possiedono nell'html una substring del nome dell'animale
-        $.getJSON('/api/getRegister', { id: 'q001w' }, function (list) {
-      
+        $.getJSON('/api/getRegister', function (list) {
+
           let page = []
           $('#heart tbody tr').remove()
 
-        list.forEach(e => {
-          let str = (e.name)
-          let srch = ($('input[name = "srch"]').val())
+          list.forEach(e => {
+            let str = (e.name)
+            let srch = ($('input[name = "srch"]').val())
 
-          if (str.match(srch) || str.toLowerCase().match(srch) || str.toLowerCase().includes(srch.toLowerCase())) {
-            page.push(e)
-          }
-        });
+            if (str.match(srch) || str.toLowerCase().match(srch) || str.toLowerCase().includes(srch.toLowerCase())) {
+              page.push(e)
+            }
+          });
 
-        loader("heart", page)
+          loader("heart", heartBeatLog(page))
         })
         return false;
         //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin
       })
     });
 
-    var everythingLoaded = setInterval(function() {
-        if (/loaded|complete/.test(document.readyState)) {
-            clearInterval(everythingLoaded);
-            $('button[data-whatever="q002w"]').trigger("click")// this is the function that gets called when everything is loaded
-        }
+    var everythingLoaded = setInterval(function () {
+      if (/loaded|complete/.test(document.readyState)) {
+        clearInterval(everythingLoaded);
+        $('button[data-whatever="q002w"]').trigger("click")// this is the function that gets called when everything is loaded
+      }
     }, 10);
   </script>
 </body>
