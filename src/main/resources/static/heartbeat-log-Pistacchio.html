@@ -65,7 +65,7 @@
     </ul>
   </div>
 <!--Modal per le info-->
-  <div class="modal fade mt-1" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 180px;">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <!--Header-->
@@ -131,13 +131,14 @@
         var modal = $(this)
         $.getJSON('/api/getAnimal', {id: gps}, function (animal) {
           var tr = $('<tr>')
-          animal.hrtbtH.push(animal.hrtbt)
-          for(let i = 0; i<7; i++) {
-            if(animal.hrtbtH[i]>=90)
-              tr.append('<td style="color: red">' + animal.hrtbtH[i] + '</td>')    
-            else
-              tr.append('<td>' + animal.hrtbtH[i] + '</td>')    
-          }
+
+          tr.append('<td>' + animal.hrtbtH[0] + '</td>')
+            .append('<td>' + animal.hrtbtH[1] + '</td>')
+            .append('<td>' + animal.hrtbtH[2] + '</td>')
+            .append('<td>' + animal.hrtbtH[3] + '</td>')
+            .append('<td>' + animal.hrtbtH[4] + '</td>')
+            .append('<td>' + animal.hrtbtH[5] + '</td>')
+            .append('<td>' + animal.hrtbt + '</td>')
 
           modal.find('.modal-title').text(animal.name)
           modal.find('.modal-body #name').append(animal.name)
@@ -187,6 +188,13 @@
         //dobbiamo ricorda che possiamo avere solo 10 elementi per pagin
       })
     });
+
+    var everythingLoaded = setInterval(function() {
+        if (/loaded|complete/.test(document.readyState)) {
+            clearInterval(everythingLoaded);
+            $('button[data-whatever="q002w"]').trigger("click")// this is the function that gets called when everything is loaded
+        }
+    }, 10);
   </script>
 </body>
 

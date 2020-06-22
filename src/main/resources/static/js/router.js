@@ -6,6 +6,12 @@ let circle
 let directionsDisplay
 let directionsService 
 
+function resetBox (){
+    $('#addresses').val('')
+    $('#percorso').off()
+    $('#box').hide()
+  }
+
 function route(map, start, end){
     var directions = {start: start, end: end};
     
@@ -41,10 +47,7 @@ function createList () {
         let str = $('<li class="list-group-item"></li>')
         let div = $('<div id="'+e.animal.gps+'">'+e.animal.name+'<div>')
         div.click(function () {
-            map.setCenter(e.getPosition())
-            map.setZoom(20)
-            $('#addresses').val(e.animal.address)
-           
+            new google.maps.event.trigger(e, 'click' );
         })
 
         str.append(div)
@@ -88,6 +91,7 @@ function createMarkers(list) {
 
         google.maps.event.addListener(marker, 'click', function() {
             //qui per aggiungere la cosa per il routing
+            resetBox()
             $('#box').toggle()
             infowindow.open(map,marker);
             document.getElementById("addresses").value = marker.animal.address;
@@ -159,10 +163,7 @@ function myMap() {
             circle.setCenter(myLatLng);
             circle.setEditable(true);
         }); 
-      })
-      
-
-   
+      })   
 }
 
 

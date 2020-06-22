@@ -63,17 +63,23 @@
 			<button id="percorso">Individua percorso</button>  
 			<button id = "cross" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</span>
-    </div>
+	</div>
 	<div class="float-right" id='googleMap'style="width:75%;height:400px;"></div>
 </section>
 	
 <script src="js/router.js"></script>
-<script>
-$(document).ready(function(){
-	$("#cross").click(resetBox)
-})
-</script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyBe3x7g-RyX5hV6QHf8yLh-SxeHMQW7Qd4&callback=myMap"></script>
-<script></script>
+<script>
+    $(document).ready(function(){
+        $("#cross").click(resetBox)
+    })
+
+    var everythingLoaded = setInterval(function() {
+        if (/loaded|complete/.test(document.readyState)) {
+            clearInterval(everythingLoaded);
+            $('#q001w').trigger("click")// this is the function that gets called when everything is loaded
+        }
+    }, 10);
+    </script>
 </body>
 </html>
