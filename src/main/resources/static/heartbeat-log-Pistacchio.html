@@ -50,7 +50,7 @@
           <th name="gps">Codice Gps</th>
           <th name="name">Nome</th>
           <th name="type">Tipo</th>
-          <th name="beat">Battiti</th>
+          <th name="beat">Battiti (bps)</th>
           <th name="details">Storico</th>
         </tr>
       </thead>
@@ -81,9 +81,9 @@
           <label id="gps"></label><br>
           <label><strong>Tipo:</strong> </label>
           <label id="type"></label><br>
-          <label><strong>Battiti:</strong> </label>
+          <label><strong>Battiti (bps):</strong> </label>
           <label id="heartbeat"></label><br>
-          <label><strong>Storico:</strong> </label>
+          <label><strong>Storico (in bps):</strong> </label>
           <table id="history" class="table table-striped">
             <thead>
               <tr>
@@ -132,13 +132,14 @@
         $.getJSON('/api/getAnimal', {id: gps}, function (animal) {
           var tr = $('<tr>')
 
-          tr.append('<td>' + animal.hrtbtH[0] + '</td>')
-            .append('<td>' + animal.hrtbtH[1] + '</td>')
-            .append('<td>' + animal.hrtbtH[2] + '</td>')
-            .append('<td>' + animal.hrtbtH[3] + '</td>')
-            .append('<td>' + animal.hrtbtH[4] + '</td>')
-            .append('<td>' + animal.hrtbtH[5] + '</td>')
-            .append('<td>' + animal.hrtbt + '</td>')
+          animal.hrtbtH.push(animal.hrtbt)
+          for(let i = 0; i<7; i++) {
+            if(animal.hrtbtH[i]>=90)
+              tr.append('<td style="color: red">' + animal.hrtbtH[i] + '</td>')    
+            else
+              tr.append('<td>' + animal.hrtbtH[i] + '</td>')    
+          }
+
 
           modal.find('.modal-title').text(animal.name)
           modal.find('.modal-body #name').append(animal.name)
