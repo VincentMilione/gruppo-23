@@ -68,7 +68,7 @@
   </div>
 
 <!--Modal per icona info -->
-<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true" style="margin-top: 250px;">
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <!--Header-->
@@ -102,7 +102,7 @@
   </div>
 
   <!--Modal per icona modifica -->
-<div class="modal fade" id="modificaModal" tabindex="-1" role="dialog" aria-labelledby="modificaModalLabel" aria-hidden="true" style="margin-top: 250px;">
+<div class="modal fade" id="modificaModal" tabindex="-1" role="dialog" aria-labelledby="modificaModalLabel" aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <!--Header-->
@@ -132,7 +132,7 @@
   </div>
 
   <!--Modal per icona elimina -->
-<div class="modal fade" id="eliminaModal" tabindex="-1" role="dialog" aria-labelledby="eliminaModalLabel" aria-hidden="true" style="margin-top: 250px;">
+<div class="modal fade" id="eliminaModal" tabindex="-1" role="dialog" aria-labelledby="eliminaModalLabel" aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <!--Header-->
@@ -160,7 +160,7 @@
   </div>
 
   <!--Modal per messaggio di avvenuta eliminazione -->
-<div class="modal fade" id="messaggioModal" tabindex="-1" role="dialog" aria-labelledby="messaggioModalLabel" aria-hidden="true" style="margin-top: 250px;">
+<div class="modal fade" id="messaggioModal" tabindex="-1" role="dialog" aria-labelledby="messaggioModalLabel" aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <!--Header-->
@@ -172,8 +172,7 @@
       </div>
       <!--body-->
       <div class="modal-body">
-        <strong id="animalName"></strong>
-          <label>e' stato eliminato correttamente dal registro!</label>
+          <label>l'animale è stato eliminato correttamente dal registro!</label>
       </div>
         <!--footer-->
         <div class="modal-footer">
@@ -184,7 +183,7 @@
   </div>
 
 <!--Modal per aggiunta animale -->
-<div class="modal fade" id="aggiungiAnimaleModal" tabindex="-1" role="dialog" aria-labelledby="aggiungiAnimaleModalLabel" aria-hidden="true" style="margin-top: 250px;">
+<div class="modal fade" id="aggiungiAnimaleModal" tabindex="-1" role="dialog" aria-labelledby="aggiungiAnimaleModalLabel" aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <!--Header-->
@@ -200,7 +199,7 @@
         <i class="fas fa-chevron-right" id="breadcrumbs"></i>
         <h6 id="secondForm" style="color:#C0C0C0">Dati avanzati</h6><br><br>
         <label><strong> Codice GPS:</strong> </label>
-        <input id="gpsToAdd" name="gpsToAdd" value="q016w" readonly><br><br>
+        <input id="gpsToAdd" name="gpsToAdd"><br><br>
         <label><strong>Nome</strong></label>
         <input id="nameToAdd" name="nameToAdd" placeholder="Fiocco" maxlength="10"><br><br>
         <label><strong>Data di nascita</strong></label>
@@ -223,7 +222,7 @@
 </div>
 
 <!--2° Modal per aggiunta animale -->
-<div class="modal fade" id="aggiungiAnimale2Modal" tabindex="-1" role="dialog" aria-labelledby="aggiungiAnimale2ModalLabel" aria-hidden="true" style="margin-top: 250px;">
+<div class="modal fade" id="aggiungiAnimale2Modal" tabindex="-1" role="dialog" aria-labelledby="aggiungiAnimale2ModalLabel" aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <!--Header-->
@@ -291,7 +290,7 @@
   </div>
 
      <!--Modal per esortare a riempire tutti i campi -->
-<div class="modal fade" id="messaggioRiempiModal" tabindex="-1" role="dialog" aria-labelledby="messaggioRiempiModalLabel" aria-hidden="true" style="margin-top: 250px;">
+<div class="modal fade" id="messaggioRiempiModal" tabindex="-1" role="dialog" aria-labelledby="messaggioRiempiModalLabel" aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <!--Header-->
@@ -423,7 +422,7 @@ $('#messaggioModal').on('show.bs.modal', function (event) {
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  var animalName = $('#eliminaButton').val()
+  var animalName = $('#eliminaButton').html()
 
   modal.find('.modal-body #animalName').text(animalName)
 });
@@ -464,6 +463,7 @@ $('input[type=radio][name=gruppo4]').change(function() {
 $('#saveAnimal').click(function(event) {
   $('#messaggioAggiuntaModal').modal('show')
 
+  var gps = $('input[name ="gpsToAdd"]').val()
   var name = $('input[name = "nameToAdd"]').val()
   var birth = document.getElementById("bdayToAdd").value;
   var type = document.getElementById("typeToAdd").value;
@@ -483,7 +483,7 @@ $('#saveAnimal').click(function(event) {
   var day=String(birth).substr(8)
 
   var bday=new Date(parseInt(year),parseInt(month), parseInt(day)).toDateString()
-  var animal =  {gps:"q016w",name: name,type: type,bday: bday,sex: sex,lmilk: milkLitres,children: children, hrtbt: 70, hrtbtH: [70,71,71,81,69,70], cordinate: {lat: 40.690140, lng: 14.714848},address: "Via Rotonda 4", nota: "Nessuna nota"}
+  var animal =  {gps:gps,name: name,type: type,bday: bday,sex: sex,lmilk: milkLitres,children: children, hrtbt: 70, hrtbtH: [70,71,71,81,69,70], cordinate: {lat: 40.690140, lng: 14.714848},address: "Via Rotonda 4", nota: "Nessuna nota"}
   $.ajax({
            dataType: "text",
            url:"/api/addAnimal",
@@ -494,6 +494,12 @@ $('#saveAnimal').click(function(event) {
            data:JSON.stringify(animal),
            type:'POST'
        })
+  let tr = $('<tr>')
+  tr.append('<td name="gps">'+animal.gps+'</td><td name="name">'+animal.name+'</td><td name="type">'+animal.type+'</td><td name="info"><button type="button" class="btn" data-toggle="modal" data-target="#infoModal" data-whatever="'+animal.gps+'"><i class="fas fa-search-plus basesimbol"></i></button></td><td name="modify"><button type="button" class="btn" data-toggle="modal" data-target="#modificaModal" data-whatever="'+animal.gps+'"><i class="fas fa-pencil-alt basesimbol"></i></button></td><td name="delete"><button type="button" class="btn" data-toggle="modal" data-target="#eliminaModal" data-whatever="'+animal.gps+'"><i class="fas fa-times basesimbol"></i></button></td>')
+  if ($('#register tbody tr').length > 10) {
+    tr.css('display', "none")
+  }
+    $('#register tbody').append(tr)
 });
 
 $('#stopAddAnimal').click(function(event) {

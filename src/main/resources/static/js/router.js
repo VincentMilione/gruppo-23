@@ -55,9 +55,27 @@ function createList () {
         })
 
         if(e.getIcon() == null){
+            div.hover(function () {
+                div.css("border-style", "solid")
+                div.css("border-color", "red")
+                div.css("border-width", "1px")
+            }, function () {
+                div.css("border-style", "")
+                div.css("border-color", "")
+                div.css("border-width", "")
+            })
             div.css("color", "red")
             out_.append(div)
         } else{
+            div.hover(function () {
+                div.css("border-style", "solid")
+                div.css("border-color", "green")
+                div.css("border-width", "1px")
+            }, function () {
+                div.css("border-style", "")
+                div.css("border-color", "")
+                div.css("border-width", "")
+            })
             div.css("color", "green")
             in_.append(div)
         }
